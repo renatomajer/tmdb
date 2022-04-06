@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="micro_spacing">7dp</dimen>
+    <dimen name="small_spacing">8dp</dimen>
+    <dimen name="medium_spacing">20dp</dimen>
+    <dimen name="large_spacing">32dp</dimen>
+
+    <dimen name="movie_list_item_padding">14dp</dimen>
+
+    <dimen name="movie_card_width">122dp</dimen>
+    <dimen name="movie_card_height">179dp</dimen>
+    <dimen name="home_movies_list_content_padding">18dp</dimen>
+    <dimen name="home_movie_list_bottom_padding">30dp</dimen>
+    
+    <dimen name="details_movie_image_height">303dp</dimen>
+    <dimen name="details_movie_image_width">363dp</dimen>
+
+    <dimen name="movie_person_card_width">125dp</dimen>
+    <dimen name="movie_person_card_height">209dp</dimen>
+
+    <dimen name="movie_person_card_name_padding_start">10dp</dimen>
+    <dimen name="movie_person_card_name_padding_end">28dp</dimen>
+
+    <dimen name="search_bar_top_bottom_padding">20dp</dimen>
+
+    <dimen name="circular_progress_bar">42dp</dimen>
+    <dimen name="circular_progress_bar_stroke_width">3dp</dimen>
+</resources>
