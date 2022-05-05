@@ -1,6 +1,6 @@
 package agency.five.tmdb
 
-import agency.five.tmdb.ui.theme.MovieItemViewState
+import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,9 +33,11 @@ fun MovieDetails(
     modifier: Modifier = Modifier,
     item: MovieItemViewState
 ) {
-    Box( modifier = modifier
-        .height(dimensionResource(id = R.dimen.details_movie_image_height))
-        .width(dimensionResource(id = R.dimen.details_movie_image_width))) {
+    Box(
+        modifier = modifier
+            .height(dimensionResource(id = R.dimen.details_movie_image_height))
+            .width(dimensionResource(id = R.dimen.details_movie_image_width))
+    ) {
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(id = item.imageResId),
@@ -66,10 +68,10 @@ fun MovieDetails(
         ) {
             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
 
-                Row (
+                Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Start
-                        ){
+                ) {
 
                     CircularProgresBar(
                         value = item.userScore,
@@ -95,9 +97,9 @@ fun MovieDetails(
                 )
 
                 Row {
-                    for(i in item.genres.indices) {
+                    for (i in item.genres.indices) {
 
-                        if(i == 0) {
+                        if (i == 0) {
                             Text(
                                 text = item.genres[i],
                                 style = Typography.body2,
@@ -130,7 +132,7 @@ fun MovieDetails(
 
 @Composable
 fun StarButton() {
-    var checked by remember { mutableStateOf(false)}
+    var checked by remember { mutableStateOf(false) }
 
     IconButton(
         onClick = {
@@ -138,7 +140,7 @@ fun StarButton() {
         },
         modifier = Modifier.padding(top = dimensionResource(id = R.dimen.micro_spacing))
     ) {
-        if(!checked) {
+        if (!checked) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_star_border),
                 contentDescription = null,
@@ -169,8 +171,6 @@ fun StarButtonPreview() {
 }
 
 
-
-
 @Preview
 @Composable
 fun MovieDetailsPreview() {
@@ -185,18 +185,16 @@ fun MovieDetailsPreview() {
         duration = "2h 6m",
         genres = mutableListOf("Action", "Science Fiction", "Adventure")
     )
-    
+
     MovieDetails(item = item)
 }
+
 
 @Composable
 fun CircularProgresBar(
     value: Int = 0,
     modifier: Modifier = Modifier
 ) {
-
-
-
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier.size(dimensionResource(id = R.dimen.circular_progress_bar))

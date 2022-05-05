@@ -1,8 +1,8 @@
-package agency.five.tmdb
+package agency.five.tmdb.ui.components
 
-import androidx.compose.foundation.Image
+import agency.five.tmdb.R
+import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -15,28 +15,27 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun FavoriteButton (
+fun FavoriteButton(
     modifier: Modifier = Modifier,
-    favorite : Boolean = false
+    movie: MovieItemViewState,
+    onFavoriteButtonClick: (MovieItemViewState) -> Unit = {}
 ) {
-    var isFavorite by remember { mutableStateOf(value = favorite)}
+//    var isFavorite by remember { mutableStateOf(value = movie.favorite) }
 
     IconButton(
         onClick = {
-                  isFavorite = isFavorite.not()
+            onFavoriteButtonClick(movie.copy(favorite = movie.favorite.not()))
         }
     ) {
 
-        if(isFavorite) {
+        if (movie.favorite) {
 
             Icon(
-                Icons.Filled.Favorite ,
+                Icons.Filled.Favorite,
                 contentDescription = null,
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.large_spacing))
@@ -48,7 +47,7 @@ fun FavoriteButton (
         } else {
 
             Icon(
-                Icons.Filled.FavoriteBorder ,
+                Icons.Filled.FavoriteBorder,
                 contentDescription = null,
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.large_spacing))
@@ -62,12 +61,9 @@ fun FavoriteButton (
     }
 }
 
-//data class FavoriteButttonModel(
-//    var isFavorite : Boolean = false
-//)
 
 @Preview
 @Composable
 fun FavoriteButtonPreview() {
-    FavoriteButton()
+    //FavoriteButton()
 }

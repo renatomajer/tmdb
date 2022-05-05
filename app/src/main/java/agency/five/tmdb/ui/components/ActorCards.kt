@@ -1,6 +1,5 @@
 package agency.five.tmdb
 
-import agency.five.tmdb.ui.theme.MovieCard
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,19 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-
-data class MoviePerson(
-    val movie: String,
-    val name: String,
-    val surname: String,
-    val movieFunction: String,
-    val role: String = "", // needs to be changed
-    val imageResId: Int = -1, // id from drawable folder (R.drawable...) -> needs to be changed
-)
-
 @Composable
-fun MoviePersonCard(
-    person: MoviePerson,
+fun ActorCard(
+    actor: Actor,
     modifier: Modifier = Modifier,
     onMoviePersonClick: () -> Unit = {}
 ) {
@@ -52,7 +41,7 @@ fun MoviePersonCard(
         ) {
             Column() {
                 Image(
-                    painter = painterResource(id = person.imageResId),
+                    painter = painterResource(id = actor.imageResId),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -61,7 +50,7 @@ fun MoviePersonCard(
                 )
 
                 Text(
-                    text = person.name + " " + person.surname,
+                    text = actor.name + " " + actor.surname,
                     style = Typography.subtitle2,
                     fontWeight = FontWeight.ExtraBold,
                     color = Color.Black,
@@ -72,14 +61,13 @@ fun MoviePersonCard(
                 )
 
                 Text(
-                    text = person.role,
+                    text = actor.role,
                     style = Typography.caption,
                     color = Color(0xFF828282),
                     modifier = Modifier
                         .padding(
                             start = dimensionResource(id = R.dimen.movie_person_card_name_padding_start)
                         )
-
                 )
             }
         }
@@ -89,10 +77,10 @@ fun MoviePersonCard(
 
 
 @Composable
-fun MoviePersonList(
+fun ActorCardsList(
     modifier: Modifier = Modifier,
-    onMoviePersonClick: (MoviePerson) -> Unit = {},
-    persons: List<MoviePerson>
+    onMoviePersonClick: (Actor) -> Unit = {},
+    actors: List<Actor>
 ) {
     LazyRow(
         modifier = modifier.fillMaxWidth(),
@@ -101,9 +89,9 @@ fun MoviePersonList(
             vertical = dimensionResource(id = R.dimen.home_movies_list_content_padding)
         )
     ) {
-        items(persons) {
-            MoviePersonCard(
-                person = it,
+        items(actors) {
+            ActorCard(
+                actor = it,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.micro_spacing)),
                 onMoviePersonClick = { onMoviePersonClick(it) }
             )
@@ -113,52 +101,48 @@ fun MoviePersonList(
 
 @Preview
 @Composable
-fun MoviePersonCardPreview() {
+fun ActorCardPreview() {
 
-    val p1 = MoviePerson (
+    val a1 = Actor(
         movie = "Iron Man 1",
         name = "Robert",
         surname = "Downey Jr.",
-        movieFunction = "Characters",
         role = "Tony Stark/Iron Man",
         imageResId = R.drawable.robert_downey
     )
 
-    MoviePersonCard(person = p1)
+    ActorCard(actor = a1)
 }
 
 
 @Preview
 @Composable
-fun MoviePersonListPreview() {
+fun ActorCardsListPreview() {
 
-    val p1 = MoviePerson (
+    val a1 = Actor(
         movie = "Iron Man 1",
         name = "Robert",
         surname = "Downey Jr.",
-        movieFunction = "Characters",
         role = "Tony Stark/Iron Man",
         imageResId = R.drawable.robert_downey
     )
 
-    val p2 = MoviePerson(
+    val a2 = Actor(
         movie = "Iron Man 1",
         name = "Terrence",
         surname = "Howard",
-        movieFunction = "Characters",
         role = "James Rhodes",
         imageResId = R.drawable.terrence_howard
     )
 
-    val p3 = MoviePerson(
+    val a3 = Actor(
         movie = "Iron Man 1",
         name = "Jeff",
         surname = "Bridges",
-        movieFunction = "Characters",
         role = "Obadiah Stane / Iron Monger",
         imageResId = R.drawable.jeff_bridges
     )
 
-    MoviePersonList(persons = listOf(p1, p2, p3))
+    ActorCardsList(actors = listOf(a1, a2, a3))
 }
 
