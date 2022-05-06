@@ -17,12 +17,11 @@ class MovieRepositoryImpl(
 
     private val popularMoviesInitialFlow = flow {
         emit(movieApi.getPopularMovies())
-    }
-        .shareIn(
-            CoroutineScope(Dispatchers.Default),
-            SharingStarted.WhileSubscribed(),
-            replay = 1
-        )
+    }.shareIn(
+        CoroutineScope(Dispatchers.Default),
+        SharingStarted.WhileSubscribed(),
+        replay = 1
+    )
 
     private val popularMoviesFlow = refreshMoviesPublisher
         .map {
@@ -103,8 +102,6 @@ class MovieRepositoryImpl(
 
     private val favouriteMoviesFlow = refreshMoviesPublisher
         .map {
-            Log.d("debug_log", "refresh")
-            Log.d("debug_log", "${movieDatabase.getFavoriteMovies()}")
             movieDatabase.getFavoriteMovies()
         }
         .shareIn(
@@ -116,7 +113,6 @@ class MovieRepositoryImpl(
     override fun getFavorites(): Flow<List<MovieItemViewState>> = favouriteMoviesFlow
 
     override suspend fun markMovieFavorite(movie: MovieItemViewState, isFavorite: Boolean) {
-        Log.d("debug_log", "markMovieFavorite: $isFavorite")
         movieDatabase.saveIsMovieFavorite(movie, isFavorite)
         movieApi.updateMovie(movie, isFavorite) // update movie mocked in MovieApi
         refreshMoviesPublisher.emit(RefreshEvent)

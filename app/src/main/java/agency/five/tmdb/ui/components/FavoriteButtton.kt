@@ -24,7 +24,6 @@ fun FavoriteButton(
     movie: MovieItemViewState,
     onFavoriteButtonClick: (MovieItemViewState) -> Unit = {}
 ) {
-//    var isFavorite by remember { mutableStateOf(value = movie.favorite) }
 
     IconButton(
         onClick = {
@@ -55,9 +54,7 @@ fun FavoriteButton(
                     .padding(dimensionResource(id = R.dimen.micro_spacing)),
                 tint = Color.White
             )
-
         }
-
     }
 }
 

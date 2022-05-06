@@ -115,6 +115,7 @@ class MovieApiImpl() : MovieApi {
         imageResId = R.drawable.jeff_bridges
     )
 
+
     override suspend fun getPopularMovies(): List<List<MovieItemViewState>> {   // size: 4 (tabs)
         return listOf(l1, l2, l3, l1)
     }
@@ -148,19 +149,19 @@ class MovieApiImpl() : MovieApi {
     }
 
     override suspend fun updateMovie(movie: MovieItemViewState, isFavorite: Boolean) {
-        for(m in l1) {
+        for (m in l1) {
             if (m.id == movie.id) {
                 m.favorite = isFavorite
             }
         }
 
-        for(m in l2) {
+        for (m in l2) {
             if (m.id == movie.id) {
                 m.favorite = isFavorite
             }
         }
 
-        for(m in l3) {
+        for (m in l3) {
             if (m.id == movie.id) {
                 m.favorite = isFavorite
             }

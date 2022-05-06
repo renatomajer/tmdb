@@ -23,7 +23,7 @@ import androidx.navigation.NavController
 @Composable
 fun TabList(
     tabData: List<String>,
-    moviesLists: List<List<MovieItemViewState>>, // changed from moviesMap: Map<String, List<MovieItemViewState>>
+    moviesLists: List<List<MovieItemViewState>>,
     navController: NavController,
     model: HomeScreenViewModel
 ) {
@@ -65,13 +65,14 @@ fun TabList(
 
         Surface() {
             val moviesData = moviesLists[tabIndex]
-            Log.d("debug_log", "$moviesData")
             MovieList(
                 movieItems = moviesData,
                 onMovieItemClick = { navController.navigate(Screens.DetailsScreen.route + "/${it.id}") },
                 onFavoriteButtonClick = { updatedMovie ->
-                    Log.d("debug_log", "$updatedMovie")
-                    model.movieFavoriteButtonClick(updatedMovie, updatedMovie.favorite)
+                    model.movieFavoriteButtonClick(
+                        moviesData.first { updatedMovie.id == it.id },
+                        updatedMovie.favorite
+                    )
                 }
             )
         }

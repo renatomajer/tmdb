@@ -41,7 +41,6 @@ import kotlin.coroutines.CoroutineContext
 @Composable
 fun FavoritesScreen(
     modifier: Modifier = Modifier,
-    //moviesList: List<MovieItemViewState> = listOf(m0, m1, m2, m3, m4, m5),    movies list is set by default
     navController: NavController
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -59,7 +58,6 @@ fun FavoritesScreen(
     //val list: List<MovieItemViewState> by favoritesViewModel.getFavoriteMovies().collectAsState(initial = listOf())
 
     val list: List<MovieItemViewState> by favoritesFlowLifecycleAware.collectAsState(initial = listOf())
-
 
     LazyVerticalGrid(
         contentPadding = PaddingValues(horizontal = 18.dp),
@@ -92,7 +90,6 @@ fun FavoritesScreen(
             )
         }
 
-        Log.d("debug_log", "$list")
         for (movie in list) {
             item {
 
@@ -105,7 +102,6 @@ fun FavoritesScreen(
                     ),
                     onMovieItemClick = { navController.navigate(Screens.DetailsScreen.route + "/${movie.id}") },
                     onFavoriteButtonClick = { updatedMovie ->
-                        Log.d("debug_log", "$updatedMovie")
                         favoritesViewModel.movieFavoriteButtonClick(movie, updatedMovie.favorite)
                     }
                 )

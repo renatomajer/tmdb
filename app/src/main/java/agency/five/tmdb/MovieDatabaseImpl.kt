@@ -1,6 +1,7 @@
 package agency.five.tmdb
 
 import agency.five.tmdb.ui.components.MovieItemViewState
+import android.util.Log
 
 class MovieDatabaseImpl() : MovieDatabase {
     private val favoriteMovies = mutableListOf<MovieItemViewState>()

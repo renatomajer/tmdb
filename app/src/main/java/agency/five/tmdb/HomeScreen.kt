@@ -4,6 +4,7 @@ import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.components.TabList
 import agency.five.tmdb.ui.theme.Typography
 import agency.five.tmdb.ui.viewmodel.HomeScreenViewModel
+import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -117,6 +118,7 @@ fun HomeScreen(
                     navController = navController,
                     model = homeScreenViewModel
                 )
+
 
             } else if (index == 1) {
                 Text(

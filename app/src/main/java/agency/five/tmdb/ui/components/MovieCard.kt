@@ -58,7 +58,6 @@ fun MovieCard(
                 start = dimensionResource(id = R.dimen.small_spacing),
                 top = dimensionResource(id = R.dimen.small_spacing)
             ),
-            //favorite = item.favorite,
             movie = item,
             onFavoriteButtonClick = onFavoriteButtonClick
         )
