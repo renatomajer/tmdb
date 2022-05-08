@@ -2,9 +2,6 @@ package agency.five.tmdb.navigation
 
 import agency.five.tmdb.DetailsScreen
 import agency.five.tmdb.MainScreen
-import agency.five.tmdb.MoviePerson
-import agency.five.tmdb.R
-import agency.five.tmdb.ui.theme.MovieItemViewState
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -16,7 +13,7 @@ import androidx.navigation.navArgument
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screens.MainScreen.route ) {
+    NavHost(navController = navController, startDestination = Screens.MainScreen.route) {
         composable(route = Screens.MainScreen.route) {
             MainScreen(navController = navController)
         }

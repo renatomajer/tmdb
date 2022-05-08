@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,13 +38,22 @@ fun TabList(
         horizontalAlignment = Alignment.Start
     ) {
         TabRow(
+            modifier = Modifier.padding(
+                horizontal = dimensionResource(id = R.dimen.home_screen_content_padding)
+            ),
             selectedTabIndex = tabIndex,
             backgroundColor = Color.Transparent,
-            divider = { TabRowDefaults.Divider( thickness = 5.dp, color = Color.Transparent ) },
+            divider = {
+                TabRowDefaults.Divider(
+                    thickness = dimensionResource(id = R.dimen.tab_row_divider_thickness),
+                    color = Color.Transparent
+                )
+            },
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    modifier = Modifier.customTabIndicatorOffset(tabPositions[tabIndex]),
-                    height = 3.dp,
+                    modifier = Modifier
+                        .customTabIndicatorOffset(tabPositions[tabIndex]),
+                    height = dimensionResource(id = R.dimen.tab_row_indicator_height),
                     color = Color(0xFF0B253F)
                 )
             }
@@ -56,25 +66,22 @@ fun TabList(
                     },
                     unselectedContentColor = Color(0xFF828282),
                     selectedContentColor = Color.Black
-
                 ) {
-                    Text(text = name, style = Typography.subtitle1, modifier = Modifier.padding(vertical = 5.dp))
+                    Text(
+                        text = name,
+                        style = Typography.subtitle1,
+                        modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.tab_text_vertical_padding))
+                    )
                 }
             }
         }
 
-
         MovieList(
             movieItems = moviesMap.getValue(key = tabData[tabIndex]),
-            onMovieItemClick = {navController.navigate(Screens.DetailsScreen.route + "/${it.id}")}
+            onMovieItemClick = { navController.navigate(Screens.DetailsScreen.route + "/${it.id}") }
         )
     }
-
-
 }
-
-
-
 
 
 @Preview
@@ -108,7 +115,8 @@ fun TabListPreview() {
             overview = "",
             title = "Puppy Love",
             imageResId = R.drawable.puppy_love
-        ))
+        )
+    )
 
     val l2 = listOf(
         MovieItemViewState(
@@ -123,10 +131,8 @@ fun TabListPreview() {
             overview = "",
             title = "Gattaca",
             imageResId = R.drawable.gattaca
-        ))
-
-
-
+        )
+    )
 
     /*TabList(tabData = listOf(
         stringResource(id = R.string.streaming_tab),
@@ -152,7 +158,7 @@ fun Modifier.customTabIndicatorOffset(
         value = currentTabPosition
     }
 ) {
-    val indicatorWidth = 75.dp
+    val indicatorWidth = dimensionResource(id = R.dimen.tab_indicator_width)
     val currentTabWidth = currentTabPosition.width
     val indicatorOffset by animateDpAsState(
         targetValue = currentTabPosition.left + currentTabWidth / 2 - indicatorWidth / 2,

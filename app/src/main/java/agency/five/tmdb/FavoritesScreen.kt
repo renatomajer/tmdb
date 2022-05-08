@@ -68,20 +68,23 @@ val m5 = MovieItemViewState(
 val moviesList = listOf(m0, m1, m2, m3, m4, m5)
 
 
-
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavoritesScreen(
     modifier: Modifier = Modifier,
-    moviesList: List<MovieItemViewState> = listOf(m0, m1, m2, m3, m4, m5),   // movies list is set by default
+    moviesList: List<MovieItemViewState> = listOf(
+        m0,
+        m1,
+        m2,
+        m3,
+        m4,
+        m5
+    ),   // movies list is set by default
     navController: NavController
 ) {
 
-
-
     LazyVerticalGrid(
-        contentPadding = PaddingValues(horizontal = 18.dp),
+        contentPadding = PaddingValues(horizontal = dimensionResource(id = R.dimen.favorites_screen_content_horizontal_padding)),
         cells = GridCells.Fixed(3),
         modifier = modifier
             .fillMaxWidth()
@@ -99,16 +102,19 @@ fun FavoritesScreen(
         }
 
         items(2) {
-            Spacer(modifier = Modifier
-                .height(18.dp)
-                .fillMaxSize())
-            Spacer(modifier = Modifier
-                .height(18.dp)
-                .fillMaxSize())
-
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.favorites_screen_spacer_height))
+                    .fillMaxSize()
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.favorites_screen_spacer_height))
+                    .fillMaxSize()
+            )
         }
 
-        for(movie in moviesList) {
+        for (movie in moviesList) {
             item {
 
                 MovieCard(
@@ -118,12 +124,10 @@ fun FavoritesScreen(
                         top = dimensionResource(id = R.dimen.micro_spacing),
                         bottom = dimensionResource(id = R.dimen.micro_spacing)
                     ),
-                    onMovieItemClick = {navController.navigate(Screens.DetailsScreen.route + "/${movie.id}")}
+                    onMovieItemClick = { navController.navigate(Screens.DetailsScreen.route + "/${movie.id}") }
                 )
             }
         }
-
-
     }
 }
 

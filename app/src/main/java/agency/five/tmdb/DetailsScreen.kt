@@ -34,13 +34,13 @@ fun DetailsScreen(
     val persons: List<MoviePerson>
     val roles: List<MoviePerson>   //list of "Top Billed Cast"
 
-    if(id != null) {
+    if (id != null) {
         item = movies[id]
     } else {
         item = movie0
     }
 
-    if(id == 0) {
+    if (id == 0) {
         persons = listOf(p1, p2, p3, p4, p5, p6)
         roles = listOf(role1, role2, role3)
     } else {
@@ -48,34 +48,41 @@ fun DetailsScreen(
         roles = listOf()
     }
 
-
-
     Scaffold(
-        topBar = { TopAppBar(
-            backgroundColor = Color(0xFF0B253F)
-        ) {
+        topBar = {
+            TopAppBar(
+                backgroundColor = Color(0xFF0B253F)
+            ) {
 
-            IconButton(onClick = { navController.popBackStack() }) {
-                Icon(
-                    Icons.Outlined.KeyboardArrowLeft,
-                    contentDescription = null,
-                    tint = Color.White
-                )
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(
+                        Icons.Outlined.KeyboardArrowLeft,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .padding(end = dimensionResource(id = R.dimen.details_screen_box_end_padding))
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_logo),
+                        contentDescription = null,
+                        modifier = Modifier.size(
+                            width = dimensionResource(id = R.dimen.top_bar_logo_width),
+                            height = dimensionResource(
+                                id = R.dimen.top_bar_logo_height
+                            )
+                        )
+                    )
+
+                }
             }
-
-            Box(
-                modifier = Modifier
-                    .padding(end = 48.dp)
-                    .fillMaxSize(),
-                contentAlignment = Alignment.Center) {
-
-                Image(
-                    painter = painterResource(id = R.drawable.ic_logo),
-                    contentDescription = null,
-                    modifier = Modifier.size(width = 134.dp, height = 35.dp))
-
-            }
-        } }
+        }
     ) {
 
         LazyColumn() {
@@ -87,7 +94,12 @@ fun DetailsScreen(
             items(count = 1) {
 
                 Column(
-                    modifier = Modifier.padding(start = 18.dp, end = 30.dp, top = 20.dp, bottom = 22.dp)
+                    modifier = Modifier.padding(
+                        start = dimensionResource(id = R.dimen.details_screen_overview_start_padding),
+                        end = dimensionResource(id = R.dimen.details_screen_overview_end_padding),
+                        top = dimensionResource(id = R.dimen.details_screen_overview_top_padding),
+                        bottom = dimensionResource(id = R.dimen.details_screen_overview_bottom_padding)
+                    )
                 ) {
                     Text(
                         text = stringResource(id = R.string.overview),
@@ -106,18 +118,25 @@ fun DetailsScreen(
             gridItems(
                 data = persons,
                 columnCount = 3,
-                modifier = Modifier.padding(start = 18.dp, end = 13.dp, bottom = 25.dp),
+                modifier = Modifier.padding(
+                    start = 18.dp,
+                    end = 13.dp,
+                    bottom = 25.dp
+                ),
                 horizontalArrangement = Arrangement.Start
-            ) {
-                itemData -> PersonRole(person = itemData)
+            ) { itemData ->
+                PersonRole(person = itemData)
             }
 
-
-            
             item {
                 Row(
                     modifier = Modifier
-                        .padding(start = 16.dp, end = 13.dp, bottom = 8.dp, top = 20.dp)
+                        .padding(
+                            start = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_start_padding),
+                            end = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_end_padding),
+                            bottom = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_bottom_padding),
+                            top = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_top_padding)
+                        )
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.Bottom
@@ -137,27 +156,21 @@ fun DetailsScreen(
 
             item {
 
-                if(roles.isEmpty()) {
+                if (roles.isEmpty()) {
                     Text(
                         text = "Nothing to show.",
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.details_screen_no_roles_start_padding))
                     )
                 } else {
                     MoviePersonList(persons = roles)
                 }
-
-
             }
-
-
-
         }
-
     }
 }
 
-/* mocked data */
 
+/* mocked data */
 val movie0 = MovieItemViewState(
     id = 0,
     title = "Iron Man 1",
@@ -173,41 +186,41 @@ val movie0 = MovieItemViewState(
 val movies = listOf(movie0, m1, m2, m3, m4, m5)
 
 // Iron Man 1 persons involved
-val p1 = MoviePerson (
+val p1 = MoviePerson(
     movie = "Iron Man 1",
     name = "Don",
     surname = "Heck",
     movieFunction = "Characters"
 )
 
-val p2 = MoviePerson (
+val p2 = MoviePerson(
     movie = "Iron Man 1",
     name = "Jack",
     surname = "Kirby",
     movieFunction = "Characters"
 )
-val p3 = MoviePerson (
+val p3 = MoviePerson(
     movie = "Iron Man 1",
     name = "Jon",
     surname = "Favreau",
     movieFunction = "Director"
 )
 
-val p4 = MoviePerson (
+val p4 = MoviePerson(
     movie = "Iron Man 1",
     name = "Don",
     surname = "Heck",
     movieFunction = "Screenplay"
 )
 
-val p5 = MoviePerson (
+val p5 = MoviePerson(
     movie = "Iron Man 1",
     name = "Jack",
     surname = "Marcum",
     movieFunction = "Screenplay"
 )
 
-val p6 = MoviePerson (
+val p6 = MoviePerson(
     movie = "Iron Man 1",
     name = "Matt",
     surname = "Holloway",
@@ -215,7 +228,7 @@ val p6 = MoviePerson (
 )
 
 // Iron Man 1 movie roles
-val role1 = MoviePerson (
+val role1 = MoviePerson(
     movie = "Iron Man 1",
     name = "Robert",
     surname = "Downey Jr.",
@@ -243,14 +256,9 @@ val role3 = MoviePerson(
 )
 
 
-
-
-
-
 @Preview
 @Composable
 fun DetailsScreenPreview() {
-
     //DetailsScreen(item = item, persons = listOf(p1, p2, p3, p4, p5, p6), roles = listOf(role1, role2, role3))
 }
 
@@ -280,7 +288,7 @@ fun PersonRole(
 @Composable
 fun PersonRolePreview() {
 
-    val p1 = MoviePerson (
+    val p1 = MoviePerson(
         movie = "Iron Man 1",
         name = "Don",
         surname = "Heck",
@@ -289,7 +297,6 @@ fun PersonRolePreview() {
 
     PersonRole(person = p1)
 }
-
 
 
 // display grid in lazy column

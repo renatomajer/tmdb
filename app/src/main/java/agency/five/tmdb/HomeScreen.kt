@@ -4,10 +4,12 @@ import agency.five.tmdb.ui.theme.MovieItemViewState
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,17 +38,13 @@ fun HomeScreen(
         stringResource(id = R.string.tv_tab)
     )
 
-
     // list of tabs for the "Trending" section
     val t3 = listOf(
         stringResource(id = R.string.today_tab),
         stringResource(id = R.string.this_week_tab)
     )
 
-
-
     LazyColumn(
-        contentPadding = PaddingValues(horizontal = 18.dp),
         modifier = modifier
     ) {
 
@@ -55,20 +53,26 @@ fun HomeScreen(
         }
 
         items(3) { index ->
-            if(index == 0) {
+            if (index == 0) {
                 Text(
                     text = stringResource(id = R.string.whats_popular_section),
                     modifier = Modifier
+                        .padding(
+                            start = dimensionResource(id = R.dimen.home_screen_content_padding)
+                        )
                         .fillMaxWidth(),
                     style = Typography.h6
                 )
 
                 TabList(tabData = t1, moviesMap = map1, navController = navController)
 
-            } else if(index == 1) {
+            } else if (index == 1) {
                 Text(
                     text = stringResource(id = R.string.free_to_watch_section),
                     modifier = Modifier
+                        .padding(
+                            start = dimensionResource(id = R.dimen.home_screen_content_padding)
+                        )
                         .fillMaxWidth(),
                     style = Typography.h6
                 )
@@ -79,6 +83,9 @@ fun HomeScreen(
                 Text(
                     text = stringResource(id = R.string.trending_section),
                     modifier = Modifier
+                        .padding(
+                            start = dimensionResource(id = R.dimen.home_screen_content_padding)
+                        )
                         .fillMaxWidth(),
                     style = Typography.h6
                 )
@@ -86,9 +93,6 @@ fun HomeScreen(
                 TabList(tabData = t3, moviesMap = map3, navController = navController)
 
             }
-
-
-
         }
     }
 }
@@ -102,7 +106,8 @@ fun HomeScreenPreview() {
         id = 0,
         overview = "",
         title = "Iron Man",
-        imageResId = R.drawable.iron_man_1)
+        imageResId = R.drawable.iron_man_1
+    )
 
     val m1 = MovieItemViewState(
         id = 1,
@@ -145,7 +150,6 @@ fun HomeScreenPreview() {
 
     val l3 = listOf(m4, m5)
 
-
     val map1 = mapOf(
         stringResource(id = R.string.streaming_tab) to l1,
         stringResource(id = R.string.on_tv_tab) to l2,
@@ -160,10 +164,6 @@ fun HomeScreenPreview() {
         stringResource(id = R.string.today_tab) to l1,
         stringResource(id = R.string.this_week_tab) to l3
     )
-
-
-
-
 
     //HomeScreen(map1 = map1, map2 = map2, map3 = map3)
 }

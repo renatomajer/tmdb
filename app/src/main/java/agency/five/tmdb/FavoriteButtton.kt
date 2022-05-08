@@ -21,22 +21,22 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun FavoriteButton (
+fun FavoriteButton(
     modifier: Modifier = Modifier,
-    favorite : Boolean = false
+    favorite: Boolean = false
 ) {
-    var isFavorite by remember { mutableStateOf(value = favorite)}
+    var isFavorite by remember { mutableStateOf(value = favorite) }
 
     IconButton(
         onClick = {
-                  isFavorite = isFavorite.not()
+            isFavorite = isFavorite.not()
         }
     ) {
 
-        if(isFavorite) {
+        if (isFavorite) {
 
             Icon(
-                Icons.Filled.Favorite ,
+                Icons.Filled.Favorite,
                 contentDescription = null,
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.large_spacing))
@@ -48,7 +48,7 @@ fun FavoriteButton (
         } else {
 
             Icon(
-                Icons.Filled.FavoriteBorder ,
+                Icons.Filled.FavoriteBorder,
                 contentDescription = null,
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.large_spacing))
@@ -56,15 +56,10 @@ fun FavoriteButton (
                     .padding(dimensionResource(id = R.dimen.micro_spacing)),
                 tint = Color.White
             )
-
         }
-
     }
 }
 
-//data class FavoriteButttonModel(
-//    var isFavorite : Boolean = false
-//)
 
 @Preview
 @Composable

@@ -36,11 +36,11 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchBar() {
     var text by remember { mutableStateOf(value = "") }
-    var showClearIcon by remember { mutableStateOf(false)}
+    var showClearIcon by remember { mutableStateOf(false) }
 
-    if(text.isEmpty()) {
+    if (text.isEmpty()) {
         showClearIcon = false
-    } else if(text.isNotEmpty()) {
+    } else if (text.isNotEmpty()) {
         showClearIcon = true
     }
 
@@ -50,25 +50,26 @@ fun SearchBar() {
         singleLine = true,
         modifier = Modifier
             .padding(
+                start = dimensionResource(id = R.dimen.home_screen_content_padding),
+                end = dimensionResource(id = R.dimen.home_screen_content_padding),
                 top = dimensionResource(id = R.dimen.search_bar_top_bottom_padding),
                 bottom = dimensionResource(id = R.dimen.search_bar_top_bottom_padding)
             )
             .background(color = Color(0xFFEAEAEB), shape = RoundedCornerShape(12.dp))
-            .fillMaxWidth()
-        ,
+            .fillMaxWidth(),
         leadingIcon = {
             Icon(
                 Icons.Rounded.Search,
                 contentDescription = "Search Icon",
-                modifier = Modifier.size(size = 20.dp),
+                modifier = Modifier.size(size = dimensionResource(id = R.dimen.search_bar_icon_size)),
                 tint = Color(0xFF0B253F)
-                )
+            )
         },
         textStyle = Typography.body1,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text), //new
         trailingIcon = {
-            if(showClearIcon) {
-                IconButton(onClick = { text = ""}) {
+            if (showClearIcon) {
+                IconButton(onClick = { text = "" }) {
                     Icon(
                         imageVector = Icons.Rounded.Clear,
                         tint = Color(0xFF0B253F),
@@ -85,14 +86,13 @@ fun SearchBar() {
             cursorColor = Color(0xFF0B253F),
             unfocusedLabelColor = Color.Transparent
         ),
-        label = { Text(
-            text = stringResource(id = R.string.search),
-            style = Typography.body1,
-            color = Color(0x320B253F)
-        )
+        label = {
+            Text(
+                text = stringResource(id = R.string.search),
+                style = Typography.body1,
+                color = Color(0x320B253F)
+            )
         }
-
-
     )
 }
 

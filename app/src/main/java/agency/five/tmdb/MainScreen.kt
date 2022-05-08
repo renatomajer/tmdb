@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -72,7 +73,6 @@ fun MainScreen(
         imageResId = R.drawable.jungle_beat
     )
 
-
     //list of movies to be shown on different sections tabs
     val l1 = listOf(m0, m1, m2, m3)
     val l2 = listOf(m0, m1)
@@ -99,99 +99,81 @@ fun MainScreen(
     )
 
 
-
     var home by remember { mutableStateOf(true) }
 
     Scaffold(
-        topBar = { TopAppBar(
-            backgroundColor = Color(0xFF0B253F)
-        ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center) {
+        topBar = { MainScreenTopBar() },
+        bottomBar = {
+            BottomNavigation(
+                backgroundColor = Color.White
+            ) {
+                BottomNavigationItem(   // home icon
+                    selected = true,
+                    onClick = {
+                        if (!home) {
+                            home = home.not()
+                        }
+                    },
+                    icon = {
 
-                Image(
-                    painter = painterResource(id = R.drawable.ic_logo),
-                    contentDescription = null,
-                    modifier = Modifier.size(width = 134.dp, height = 35.dp))
+                        if (home) {
+                            Icon(
+                                Icons.Filled.Home,
+                                contentDescription = null,
+                                tint = Color(0xFF0B253F)
+                            )
+                        } else {
+                            Icon(
+                                Icons.Outlined.Home,
+                                contentDescription = null,
+                                tint = Color(0xFFBDBDBD)
+                            )
+                        }
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(id = R.string.home),
+                            style = Typography.overline,
+                            color = if (home) Color(0xFF0B253F) else Color(0xFFBDBDBD)
+                        )
+                    }
+                )
 
+                BottomNavigationItem(   // favorites icon
+                    selected = false,
+                    onClick = {
+                        if (home) {
+                            home = home.not()
+                        }
+                    },
+                    icon = {
+
+                        if (!home) {
+                            Icon(
+                                Icons.Filled.Favorite,
+                                contentDescription = null,
+                                tint = Color(0xFF0B253F)
+                            )
+                        } else {
+                            Icon(
+                                Icons.Outlined.Favorite,
+                                contentDescription = null,
+                                tint = Color(0xFFBDBDBD)
+                            )
+                        }
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(id = R.string.favorites),
+                            style = Typography.overline,
+                            color = if (!home) Color(0xFF0B253F) else Color(0xFFBDBDBD)
+                        )
+                    }
+                )
             }
-        } },
-        bottomBar = { BottomNavigation(
-            backgroundColor = Color.White
-        ) {
-            BottomNavigationItem(   // home icon
-                selected = true,
-                onClick = {
-
-                    if(!home) {
-                        home = home.not()
-                    }
-                          },
-                icon = {
-
-                    if(home) {
-                        Icon(
-                            Icons.Filled.Home,
-                            contentDescription = null,
-                            tint = Color(0xFF0B253F)
-                        )
-
-                    } else {
-                        Icon(
-                            Icons.Outlined.Home,
-                            contentDescription = null,
-                            tint = Color(0xFFBDBDBD)
-                        )
-                    }
-
-                },
-                label = {
-                    Text(
-                        text = stringResource(id = R.string.home),
-                        style = Typography.overline,
-                        color = if(home) Color(0xFF0B253F) else Color(0xFFBDBDBD)
-                    )
-                }
-            )
-
-            BottomNavigationItem(   // favorites icon
-                selected = false,
-                onClick = {
-                    if(home) {
-                        home = home.not()
-                    }
-
-                          },
-                icon = {
-
-                    if(!home) {
-                        Icon(
-                            Icons.Filled.Favorite,
-                            contentDescription = null,
-                            tint = Color(0xFF0B253F)
-                        )
-
-                    } else {
-                        Icon(
-                            Icons.Outlined.Favorite,
-                            contentDescription = null,
-                            tint = Color(0xFFBDBDBD)
-                        )
-                    }
-
-                },
-                label = {
-                    Text(
-                        text = stringResource(id = R.string.favorites),
-                        style = Typography.overline,
-                        color = if(!home) Color(0xFF0B253F) else Color(0xFFBDBDBD)
-                    )
-                }
-            )
-        } }
+        }
     ) {
-        if(home) {
+        if (home) {
             HomeScreen(
                 modifier = Modifier.padding(bottom = it.calculateBottomPadding()),
                 map1 = map1,
@@ -205,7 +187,6 @@ fun MainScreen(
                 navController = navController
             ) // movie list is set by default
         }
-
     }
 }
 
@@ -214,5 +195,30 @@ fun MainScreen(
 fun DefaultPreview() {
     TmdbTheme {
         //MainScreen()
+    }
+}
+
+
+@Composable
+fun MainScreenTopBar() {
+    TopAppBar(
+        backgroundColor = Color(0xFF0B253F)
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_logo),
+                contentDescription = null,
+                modifier = Modifier.size(
+                    width = dimensionResource(id = R.dimen.top_bar_logo_width),
+                    height = dimensionResource(
+                        id = R.dimen.top_bar_logo_height
+                    )
+                )
+            )
+        }
     }
 }

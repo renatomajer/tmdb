@@ -20,7 +20,7 @@ import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
 
-data class MovieItemViewState (
+data class MovieItemViewState(
     val id: Int,
     val title: String,
     val overview: String,
@@ -75,15 +75,30 @@ fun MovieList(
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = dimensionResource(id = R.dimen.home_movie_list_bottom_padding)),
+            .padding(
+                bottom = dimensionResource(id = R.dimen.home_movie_list_bottom_padding)
+            ),
         contentPadding = PaddingValues(
             vertical = dimensionResource(id = R.dimen.home_movies_list_content_padding)
         )
     ) {
         items(movieItems) {
+
+            // movie cards padding
+            var contentModifier = Modifier.padding(
+                end = dimensionResource(id = R.dimen.movie_list_item_padding)
+            )
+
+            if (movieItems.indexOf(it) == 0) { // change padding only for the first item
+                contentModifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.movie_list_item_padding),
+                    end = dimensionResource(id = R.dimen.movie_list_item_padding)
+                )
+            }
+
             MovieCard(
                 item = it,
-                modifier = Modifier.padding(end = dimensionResource(id = R.dimen.movie_list_item_padding)),
+                modifier = contentModifier,
                 onMovieItemClick = { onMovieItemClick(it) }
             )
         }
@@ -94,33 +109,35 @@ fun MovieList(
 @Preview
 @Composable
 fun MovieListPreview() {
-    MovieList(movieItems = listOf(
-        MovieItemViewState(
-            id = 0,
-            overview = "",
-            title = "Iron Man",
-            imageResId = R.drawable.iron_man_1
-        ),
+    MovieList(
+        movieItems = listOf(
+            MovieItemViewState(
+                id = 0,
+                overview = "",
+                title = "Iron Man",
+                imageResId = R.drawable.iron_man_1
+            ),
 
-        MovieItemViewState(
-            id = 1,
-            overview = "",
-            title = "Gattaca",
-            imageResId = R.drawable.gattaca
-        ),
+            MovieItemViewState(
+                id = 1,
+                overview = "",
+                title = "Gattaca",
+                imageResId = R.drawable.gattaca
+            ),
 
-        MovieItemViewState(
-            id = 2,
-            overview = "",
-            title = "Lion King",
-            imageResId = R.drawable.lion_king
-        ),
+            MovieItemViewState(
+                id = 2,
+                overview = "",
+                title = "Lion King",
+                imageResId = R.drawable.lion_king
+            ),
 
-        MovieItemViewState(
-            id = 3,
-            overview = "",
-            title = "Puppy Love",
-            imageResId = R.drawable.puppy_love
+            MovieItemViewState(
+                id = 3,
+                overview = "",
+                title = "Puppy Love",
+                imageResId = R.drawable.puppy_love
+            )
         )
-    ))
+    )
 }

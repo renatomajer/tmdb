@@ -1,6 +1,5 @@
 package agency.five.tmdb
 
-import agency.five.tmdb.ui.theme.MovieCard
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -56,8 +55,8 @@ fun MoviePersonCard(
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .height(154.dp)
-                        .width(125.dp)
+                        .height(dimensionResource(id = R.dimen.movie_person_image_height))
+                        .width(dimensionResource(id = R.dimen.movie_person_image_width))
                 )
 
                 Text(
@@ -79,12 +78,10 @@ fun MoviePersonCard(
                         .padding(
                             start = dimensionResource(id = R.dimen.movie_person_card_name_padding_start)
                         )
-
                 )
             }
         }
     }
-
 }
 
 
@@ -115,7 +112,7 @@ fun MoviePersonList(
 @Composable
 fun MoviePersonCardPreview() {
 
-    val p1 = MoviePerson (
+    val p1 = MoviePerson(
         movie = "Iron Man 1",
         name = "Robert",
         surname = "Downey Jr.",
@@ -132,7 +129,7 @@ fun MoviePersonCardPreview() {
 @Composable
 fun MoviePersonListPreview() {
 
-    val p1 = MoviePerson (
+    val p1 = MoviePerson(
         movie = "Iron Man 1",
         name = "Robert",
         surname = "Downey Jr.",
