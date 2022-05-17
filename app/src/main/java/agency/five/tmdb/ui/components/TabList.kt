@@ -63,8 +63,9 @@ fun TabList(
             }
         }
 
-        Surface() {
+        //Surface() {
             val moviesData = moviesLists[tabIndex]
+            Log.d("debug_log", "${tabData.first()}: $moviesData")
             MovieList(
                 movieItems = moviesData,
                 onMovieItemClick = { navController.navigate(Screens.DetailsScreen.route + "/${it.id}") },
@@ -75,7 +76,7 @@ fun TabList(
                     )
                 }
             )
-        }
+        //}
     }
 }
 

@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 
 @Composable
 fun ActorCard(
@@ -41,7 +42,7 @@ fun ActorCard(
         ) {
             Column() {
                 Image(
-                    painter = painterResource(id = actor.imageResId),
+                    painter = rememberImagePainter("https://image.tmdb.org/t/p/w200" + actor.profile_path),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -50,7 +51,7 @@ fun ActorCard(
                 )
 
                 Text(
-                    text = actor.name + " " + actor.surname,
+                    text = actor.name,
                     style = Typography.subtitle2,
                     fontWeight = FontWeight.ExtraBold,
                     color = Color.Black,
@@ -61,7 +62,7 @@ fun ActorCard(
                 )
 
                 Text(
-                    text = actor.role,
+                    text = actor.character,
                     style = Typography.caption,
                     color = Color(0xFF828282),
                     modifier = Modifier
@@ -102,7 +103,7 @@ fun ActorCardsList(
 @Preview
 @Composable
 fun ActorCardPreview() {
-
+/*
     val a1 = Actor(
         movie = "Iron Man 1",
         name = "Robert",
@@ -112,13 +113,15 @@ fun ActorCardPreview() {
     )
 
     ActorCard(actor = a1)
+
+ */
 }
 
 
 @Preview
 @Composable
 fun ActorCardsListPreview() {
-
+/*
     val a1 = Actor(
         movie = "Iron Man 1",
         name = "Robert",
@@ -144,5 +147,7 @@ fun ActorCardsListPreview() {
     )
 
     ActorCardsList(actors = listOf(a1, a2, a3))
+
+ */
 }
 

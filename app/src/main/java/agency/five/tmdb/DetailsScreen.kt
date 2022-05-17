@@ -71,7 +71,7 @@ fun DetailsScreen(
 
     //TODO: fix the bug
     val item: MovieItemViewState by itemFlowLifecycleAware
-        .collectAsState(initial = MovieItemViewState(imageResId = R.drawable.jungle_beat)) //if no imageResId is set, the app crashes
+        .collectAsState(initial = MovieItemViewState()) //if no imageResId is set, the app crashes
 
     val personFunctions: List<PersonFunction> by personFunctionsFlowLifecycleAware
         .collectAsState(initial = emptyList())
@@ -194,14 +194,14 @@ fun PersonFunction(
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
-            text = person.name + " " + person.surname,
+            text = person.name,
             style = Typography.subtitle2,
             fontWeight = FontWeight.ExtraBold,
             color = Color.Black
         )
 
         Text(
-            text = person.movieFunction,
+            text = person.department,
             style = Typography.body2,
             color = Color.Black
         )
@@ -212,13 +212,15 @@ fun PersonFunction(
 @Preview
 @Composable
 fun PersonRolePreview() {
-
+/*
     val p1 = PersonFunction(
         name = "Don",
         surname = "Heck",
         movieFunction = "Characters"
     )
     PersonFunction(person = p1)
+
+ */
 }
 
 

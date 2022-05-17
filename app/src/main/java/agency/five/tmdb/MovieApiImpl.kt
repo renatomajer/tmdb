@@ -1,18 +1,26 @@
 package agency.five.tmdb
 
 import agency.five.tmdb.ui.components.MovieItemViewState
+import android.util.Log
+import io.ktor.client.*
+import io.ktor.client.request.*
 
 
-class MovieApiImpl() : MovieApi {
+class MovieApiImpl(
+    private val client: HttpClient
+) : MovieApi {
 
+    private val API_KEY = "0d756c167ac7d8a9afae24e0d3af8a9e"
+
+    /*
     private val m0 = MovieItemViewState(
         id = 0,
         title = "Iron Man 1",
         overview = "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
         imageResId = R.drawable.iron_man_1,
-        date = "05/02/2008",
-        userScore = 76,
-        country = "US",
+        release_date = "05/02/2008",
+        vote_average = 7.6,
+        original_language = "US",
         duration = "2h 6m",
         genres = mutableListOf("Action", "Science Fiction", "Adventure")
     )
@@ -53,6 +61,9 @@ class MovieApiImpl() : MovieApi {
 
     private val l3 = listOf(m4, m5)
 
+     */
+
+    /*
     // Iron Man 1 persons functions
     private val p1 = PersonFunction(
         name = "Don",
@@ -115,56 +126,84 @@ class MovieApiImpl() : MovieApi {
         imageResId = R.drawable.jeff_bridges
     )
 
+     */
+
 
     override suspend fun getPopularMovies(): List<List<MovieItemViewState>> {   // size: 4 (tabs)
-        return listOf(l1, l2, l3, l1)
+
+        val forRent = getPopularForRent().subList(0, 10)
+
+        val inTheaters = getPopularInTheaters().subList(0, 10)
+
+        val onTV = getPopularOnTV().subList(0, 10)
+
+        val streaming = getPopularStreaming().subList(0, 10)
+
+
+        //return listOf(l1, l2, l3, l1)
+        return listOf(streaming, onTV, forRent, inTheaters)
     }
 
+    override suspend fun getPopularForRent(): List<MovieItemViewState> {
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/movie/popular?api_key=$API_KEY").movies
+    }
+
+    override suspend fun getPopularInTheaters(): List<MovieItemViewState> {
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/movie/now_playing?api_key=$API_KEY").movies
+    }
+
+    override suspend fun getPopularStreaming(): List<MovieItemViewState> {
+        // now playing movies on page=2
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/movie/now_playing?api_key=$API_KEY&page=2").movies
+    }
+
+    override suspend fun getPopularOnTV(): List<MovieItemViewState> {
+        // popular movies on page=2
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/movie/popular?api_key=$API_KEY&page=2").movies
+    }
+
+
     override suspend fun getTrendingMovies(): List<List<MovieItemViewState>> {  // size: 2 (tabs)
-        return listOf(l2, l3)
+        return listOf(getTrendingToday().subList(0, 10), getTrendingThisWeek().subList(0, 10))
+    }
+
+    override suspend fun getTrendingToday(): List<MovieItemViewState> {
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/trending/movie/day?api_key=$API_KEY").movies
+    }
+
+    override suspend fun getTrendingThisWeek(): List<MovieItemViewState> {
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/trending/movie/week?api_key=$API_KEY").movies
     }
 
     override suspend fun getFreeMovies(): List<List<MovieItemViewState>> {  // size: 2 (tabs)
-        return listOf(l1, l3)
+        return listOf(getUpcomingMovies().subList(0, 10), getTopRatedMovies().subList(0, 10))
+    }
+
+    override suspend fun getTopRatedMovies(): List<MovieItemViewState> {
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/movie/top_rated?api_key=$API_KEY").movies
+    }
+
+    override suspend fun getUpcomingMovies(): List<MovieItemViewState> {
+        return client.get<MoviesResponse>("https://api.themoviedb.org/3/movie/upcoming?api_key=$API_KEY").movies
     }
 
     override suspend fun getMovie(movieId: Int): MovieItemViewState {
-        return listOf(m0, m1, m2, m3, m4, m5)[movieId]
+        return client.get<MovieItemViewState>("https://api.themoviedb.org/3/movie/$movieId?api_key=$API_KEY")
     }
 
     override suspend fun getPersonFunctions(movieId: Int): List<PersonFunction> {
-        return if (movieId == 0) {
-            listOf(p1, p2, p3, p4, p5, p6)
-        } else {
-            emptyList()
-        }
+        val result = client.get<PersonsFunctionsResponse>("https://api.themoviedb.org/3/movie/$movieId/credits?api_key=$API_KEY").personsFunctions
+
+        return if(result.size > 6) result.subList(0, 6)
+        else result
     }
 
     override suspend fun getActors(movieId: Int): List<Actor> {
-        return if (movieId == 0) {
-            listOf(a1, a2, a3)
-        } else {
-            emptyList()
-        }
+        val result = client.get<ActorResponse>("https://api.themoviedb.org/3/movie/$movieId/credits?api_key=$API_KEY").actors
+
+        return if(result.size > 6) result.subList(0, 6)
+        else result
+
     }
 
-    override suspend fun updateMovie(movie: MovieItemViewState, isFavorite: Boolean) {
-        for (m in l1) {
-            if (m.id == movie.id) {
-                m.favorite = isFavorite
-            }
-        }
-
-        for (m in l2) {
-            if (m.id == movie.id) {
-                m.favorite = isFavorite
-            }
-        }
-
-        for (m in l3) {
-            if (m.id == movie.id) {
-                m.favorite = isFavorite
-            }
-        }
-    }
 }

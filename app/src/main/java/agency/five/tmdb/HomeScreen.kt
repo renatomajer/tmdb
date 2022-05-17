@@ -34,44 +34,56 @@ fun HomeScreen(
 
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    val popularFlowLifecycleAware =
-        remember(homeScreenViewModel.getPopularMoviesLists(), lifecycleOwner) {
-            homeScreenViewModel.getPopularMoviesLists().flowWithLifecycle(
-                lifecycleOwner.lifecycle,
-                Lifecycle.State.STARTED
-            )
-        }
+//    val popularFlowLifecycleAware =
+//        remember(homeScreenViewModel.getPopularMoviesLists(), lifecycleOwner) {
+//            homeScreenViewModel.getPopularMoviesLists().flowWithLifecycle(
+//                lifecycleOwner.lifecycle,
+//                Lifecycle.State.STARTED
+//            )
+//        }
 
-    val trendingFlowLifecycleAware =
-        remember(homeScreenViewModel.getTrendingMoviesLists(), lifecycleOwner) {
-            homeScreenViewModel.getTrendingMoviesLists().flowWithLifecycle(
-                lifecycleOwner.lifecycle,
-                Lifecycle.State.STARTED
-            )
-        }
+//    val trendingFlowLifecycleAware =
+//        remember(homeScreenViewModel.getTrendingMoviesLists(), lifecycleOwner) {
+//            homeScreenViewModel.getTrendingMoviesLists().flowWithLifecycle(
+//                lifecycleOwner.lifecycle,
+//                Lifecycle.State.STARTED
+//            )
+//        }
+//
+//    val freeFlowLifecycleAware =
+//        remember(homeScreenViewModel.getFreeMoviesLists(), lifecycleOwner) {
+//            homeScreenViewModel.getFreeMoviesLists().flowWithLifecycle(
+//                lifecycleOwner.lifecycle,
+//                Lifecycle.State.STARTED
+//            )
+//        }
 
-    val freeFlowLifecycleAware =
-        remember(homeScreenViewModel.getFreeMoviesLists(), lifecycleOwner) {
-            homeScreenViewModel.getFreeMoviesLists().flowWithLifecycle(
-                lifecycleOwner.lifecycle,
-                Lifecycle.State.STARTED
-            )
-        }
+//    val popular: List<List<MovieItemViewState>> by popularFlowLifecycleAware
+//        .collectAsState(
+//            initial = listOf(emptyList(), emptyList(), emptyList(), emptyList())
+//        )
 
-    val popular: List<List<MovieItemViewState>> by popularFlowLifecycleAware
-        .collectAsState(
-            initial = listOf(emptyList(), emptyList(), emptyList(), emptyList())
-        )
+    val popular: List<List<MovieItemViewState>> by homeScreenViewModel.getPopularMoviesLists()
+        .collectAsState(initial = listOf(emptyList(), emptyList(), emptyList(), emptyList()))
 
-    val trending: List<List<MovieItemViewState>> by trendingFlowLifecycleAware
-        .collectAsState(
-            initial = listOf(emptyList(), emptyList())
-        )
 
-    val free: List<List<MovieItemViewState>> by freeFlowLifecycleAware
-        .collectAsState(
-            initial = listOf(emptyList(), emptyList())
-        )
+//    val trending: List<List<MovieItemViewState>> by trendingFlowLifecycleAware
+//        .collectAsState(
+//            initial = listOf(emptyList(), emptyList())
+//        )
+
+    val trending: List<List<MovieItemViewState>> by homeScreenViewModel.getTrendingMoviesLists()
+        .collectAsState(initial = listOf(emptyList(), emptyList()))
+
+
+//    val free: List<List<MovieItemViewState>> by freeFlowLifecycleAware
+//        .collectAsState(
+//            initial = listOf(emptyList(), emptyList())
+//        )
+
+    val free: List<List<MovieItemViewState>> by homeScreenViewModel.getFreeMoviesLists()
+        .collectAsState(initial = listOf(emptyList(), emptyList()))
+
 
 
     // list of tabs for the "What's popular" section
@@ -105,6 +117,7 @@ fun HomeScreen(
 
         items(3) { index ->
             if (index == 0) {
+                Log.d("debug_log", "RECOMPOSITION, popular: $popular")
                 Text(
                     text = stringResource(id = R.string.whats_popular_section),
                     modifier = Modifier
@@ -119,8 +132,8 @@ fun HomeScreen(
                     model = homeScreenViewModel
                 )
 
-
             } else if (index == 1) {
+                Log.d("debug_log", "RECOMPOSITION, free: $popular")
                 Text(
                     text = stringResource(id = R.string.free_to_watch_section),
                     modifier = Modifier
@@ -136,6 +149,7 @@ fun HomeScreen(
                 )
 
             } else {
+                Log.d("debug_log", "RECOMPOSITION, trending: $popular")
                 Text(
                     text = stringResource(id = R.string.trending_section),
                     modifier = Modifier
