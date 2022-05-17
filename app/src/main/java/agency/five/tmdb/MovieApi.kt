@@ -15,5 +15,4 @@ interface MovieApi {
 
     suspend fun getActors(movieId: Int): List<Actor>
 
-    suspend fun updateMovie(movie: MovieItemViewState, isFavorite: Boolean)
 }

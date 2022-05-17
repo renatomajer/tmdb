@@ -11,12 +11,18 @@ class MovieDatabaseImpl() : MovieDatabase {
     }
 
     override suspend fun saveIsMovieFavorite(movie: MovieItemViewState, isFavorite: Boolean) {
-        if (isFavorite) {
-            if (!favoriteMovies.contains(movie)) {
-                favoriteMovies.add(movie)
+        // isFavorite - new value
+        var index = -1
+        for (fav in favoriteMovies) {
+            if (fav.id == movie.id) {
+                index = favoriteMovies.indexOf(fav)
             }
+        }
+
+        if (index != -1) {
+            favoriteMovies.removeAt(index)
         } else {
-            favoriteMovies.remove(movie)
+            favoriteMovies.add(movie)
         }
     }
 }

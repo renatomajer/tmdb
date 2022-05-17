@@ -148,23 +148,4 @@ class MovieApiImpl() : MovieApi {
         }
     }
 
-    override suspend fun updateMovie(movie: MovieItemViewState, isFavorite: Boolean) {
-        for (m in l1) {
-            if (m.id == movie.id) {
-                m.favorite = isFavorite
-            }
-        }
-
-        for (m in l2) {
-            if (m.id == movie.id) {
-                m.favorite = isFavorite
-            }
-        }
-
-        for (m in l3) {
-            if (m.id == movie.id) {
-                m.favorite = isFavorite
-            }
-        }
-    }
 }
