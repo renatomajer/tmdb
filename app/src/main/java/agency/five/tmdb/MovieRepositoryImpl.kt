@@ -16,7 +16,6 @@ class MovieRepositoryImpl(
     private val refreshMoviesPublisher = MutableSharedFlow<RefreshEvent>(replay = 1)
 
     private val popularMoviesInitialFlow = flow {
-        //Log.d("debug_log", "INITIAL FLOW EMITED")
         emit(movieApi.getPopularMovies())
     }.shareIn(
         CoroutineScope(Dispatchers.Default),
@@ -34,7 +33,6 @@ class MovieRepositoryImpl(
             SharingStarted.WhileSubscribed(),
             replay = 1
         )
-
 
     override fun getPopularMovies(): Flow<List<List<MovieItemViewState>>> = merge(
         popularMoviesInitialFlow,
