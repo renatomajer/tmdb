@@ -4,6 +4,7 @@ package agency.five.tmdb.ui.components
 import agency.five.tmdb.navigation.Screens
 import agency.five.tmdb.ui.theme.Typography
 import agency.five.tmdb.ui.viewmodel.HomeScreenViewModel
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+
 
 @Composable
 fun TabList(
@@ -65,6 +67,8 @@ fun TabList(
 
         Surface() {
             val moviesData = moviesLists[tabIndex]
+//            val referenceValue = Integer.toHexString(System.identityHashCode(moviesLists))
+//            Log.d("debug_log", "$referenceValue: moviesData: ${tabData[tabIndex]}")
             MovieList(
                 movieItems = moviesData,
                 onMovieItemClick = { navController.navigate(Screens.DetailsScreen.route + "/${it.id}") },

@@ -1,7 +1,6 @@
 package agency.five.tmdb
 
 import agency.five.tmdb.ui.components.MovieItemViewState
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -15,122 +14,87 @@ class MovieRepositoryImpl(
 
     private val refreshMoviesPublisher = MutableSharedFlow<RefreshEvent>(replay = 1)
 
-    private val popularMoviesInitialFlow = flow {
-        emit(movieApi.getPopularMovies())
-    }.shareIn(
-        CoroutineScope(Dispatchers.Default),
-        SharingStarted.WhileSubscribed(),
-        replay = 1
-    )
-
     private val popularMoviesFlow = refreshMoviesPublisher
+        .onStart { refreshMoviesPublisher.emit(RefreshEvent) }
         .map {
             movieApi.getPopularMovies()
         }
-        .shareIn(
-            CoroutineScope(Dispatchers.Default),
-            SharingStarted.WhileSubscribed(),
-            replay = 1
-        )
-
-
-    override fun getPopularMovies(): Flow<List<List<MovieItemViewState>>> = merge(
-        popularMoviesInitialFlow,
-        popularMoviesFlow
-    ).onEach { it ->
-        val favs = movieDatabase.getFavoriteMovies()
-        if (favs.isNotEmpty()) {
-            it.forEach { list ->
-                list.forEach {
+        .map { it ->
+            val favs = movieDatabase.getFavoriteMovies()
+            it.map { list ->
+                list.map {
                     var isFavorite = false
                     for (fav in favs) {
                         if (fav.id == it.id) {
                             isFavorite = true
+                            break
                         }
                     }
-                    it.favorite = isFavorite
+                    it.copy(favorite = isFavorite)
                 }
             }
         }
-    }
-
-    private val trendingMoviesInitialFlow = flow {
-        emit(movieApi.getTrendingMovies())
-    }
         .shareIn(
             CoroutineScope(Dispatchers.Default),
             SharingStarted.WhileSubscribed(),
             replay = 1
         )
 
+    override fun getPopularMovies(): Flow<List<List<MovieItemViewState>>> = popularMoviesFlow
+
     private val trendingMoviesFlow = refreshMoviesPublisher
+        .onStart { refreshMoviesPublisher.emit(RefreshEvent) }
         .map {
             movieApi.getTrendingMovies()
         }
-        .shareIn(
-            CoroutineScope(Dispatchers.Default),
-            SharingStarted.WhileSubscribed(),
-            replay = 1
-        )
-
-    override fun getTrendingMovies(): Flow<List<List<MovieItemViewState>>> = merge(
-        trendingMoviesInitialFlow,
-        trendingMoviesFlow
-    ).onEach { it ->
-        val favs = movieDatabase.getFavoriteMovies()
-        if (favs.isNotEmpty()) {
-            it.forEach { list ->
-                list.forEach {
+        .map { it ->
+            val favs = movieDatabase.getFavoriteMovies()
+            it.map { list ->
+                list.map {
                     var isFavorite = false
                     for (fav in favs) {
                         if (fav.id == it.id) {
                             isFavorite = true
                         }
                     }
-                    it.favorite = isFavorite
+                    it.copy(favorite = isFavorite)
                 }
             }
         }
-    }
-
-    private val freeMoviesInitialFlow = flow {
-        emit(movieApi.getFreeMovies())
-    }
         .shareIn(
             CoroutineScope(Dispatchers.Default),
             SharingStarted.WhileSubscribed(),
             replay = 1
         )
 
+    override fun getTrendingMovies(): Flow<List<List<MovieItemViewState>>> = trendingMoviesFlow
+
     private val freeMoviesFlow = refreshMoviesPublisher
+        .onStart { refreshMoviesPublisher.emit(RefreshEvent) }
         .map {
             movieApi.getFreeMovies()
         }
-        .shareIn(
-            CoroutineScope(Dispatchers.Default),
-            SharingStarted.WhileSubscribed(),
-            replay = 1
-        )
-
-    override fun getFreeMovies(): Flow<List<List<MovieItemViewState>>> = merge(
-        freeMoviesInitialFlow,
-        freeMoviesFlow
-    ).onEach { it ->
-        val favs = movieDatabase.getFavoriteMovies()
-        if (favs.isNotEmpty()) {
-            it.forEach { list ->
-                list.forEach {
+        .map { it ->
+            val favs = movieDatabase.getFavoriteMovies()
+            it.map { list ->
+                list.map {
                     var isFavorite = false
                     for (fav in favs) {
                         if (fav.id == it.id) {
                             isFavorite = true
                         }
                     }
-                    it.favorite = isFavorite
+                    it.copy(favorite = isFavorite)
                 }
             }
         }
-    }
+        .shareIn(
+            CoroutineScope(Dispatchers.Default),
+            SharingStarted.WhileSubscribed(),
+            replay = 1
+        )
+
+    override fun getFreeMovies(): Flow<List<List<MovieItemViewState>>> = freeMoviesFlow
 
     override fun getMovie(movieId: Int): Flow<MovieItemViewState> {
         return flow { emit(movieApi.getMovie(movieId)) }
@@ -144,8 +108,7 @@ class MovieRepositoryImpl(
         return flow { emit(movieApi.getActors(movieId)) }
     }
 
-
-    private val favouriteMoviesFlow = refreshMoviesPublisher
+    private val favoriteMoviesFlow = refreshMoviesPublisher
         .map {
             movieDatabase.getFavoriteMovies()
         }
@@ -155,7 +118,7 @@ class MovieRepositoryImpl(
             replay = 1
         )
 
-    override fun getFavorites(): Flow<List<MovieItemViewState>> = favouriteMoviesFlow
+    override fun getFavorites(): Flow<List<MovieItemViewState>> = favoriteMoviesFlow
 
     override suspend fun markMovieFavorite(movie: MovieItemViewState, isFavorite: Boolean) {
         movie.favorite = isFavorite
