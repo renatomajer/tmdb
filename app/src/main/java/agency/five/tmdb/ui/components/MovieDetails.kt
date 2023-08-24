@@ -12,7 +12,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,8 +23,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
 
 
 @Composable
@@ -40,7 +39,7 @@ fun MovieDetails(
     ) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = item.imageResId),
+            painter = rememberImagePainter("https://image.tmdb.org/t/p/w400" + item.poster_path),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             alignment = Alignment.TopStart
@@ -74,7 +73,7 @@ fun MovieDetails(
                 ) {
 
                     CircularProgresBar(
-                        value = item.userScore,
+                        value = (item.vote_average * 10).toInt() ,
                         modifier = Modifier.padding(end = dimensionResource(id = R.dimen.small_spacing))
                     )
 
@@ -91,7 +90,7 @@ fun MovieDetails(
                 )
 
                 Text(
-                    text = item.date + " (" + item.country + ")",
+                    text = item.release_date + " (" + item.original_language + ")",
                     style = Typography.body2,
                     color = Color.White
                 )
@@ -101,13 +100,13 @@ fun MovieDetails(
 
                         if (i == 0) {
                             Text(
-                                text = item.genres[i],
+                                text = item.genres[i].name,
                                 style = Typography.body2,
                                 color = Color.White
                             )
                         } else {
                             Text(
-                                text = ", " + item.genres[i],
+                                text = ", " + item.genres[i].name,
                                 style = Typography.body2,
                                 color = Color.White
                             )
@@ -116,7 +115,7 @@ fun MovieDetails(
                     }
 
                     Text(
-                        text = " " + item.duration,
+                        text = " " + item.runtime + "m",
                         style = Typography.body2,
                         color = Color.White,
                         fontWeight = FontWeight.Bold
@@ -174,19 +173,22 @@ fun StarButtonPreview() {
 @Preview
 @Composable
 fun MovieDetailsPreview() {
+    /*
     val item = MovieItemViewState(
         id = 0,
         title = "Iron Man 1",
         overview = "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
         imageResId = R.drawable.iron_man_1_medium,
-        date = "05/02/2008",
-        userScore = 76,
-        country = "US",
+        release_date = "05/02/2008",
+        vote_average = 7.6,
+        original_language = "US",
         duration = "2h 6m",
         genres = mutableListOf("Action", "Science Fiction", "Adventure")
     )
 
     MovieDetails(item = item)
+
+     */
 }
 
 

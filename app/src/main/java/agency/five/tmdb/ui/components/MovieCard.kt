@@ -10,23 +10,32 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.rememberImagePainter
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class MovieItemViewState(
     val id: Int = 0,
     val title: String = "",
     val overview: String = "Nothing to show",
-    val imageResId: Int = -1, // id from drawable folder (R.drawable...)
     var favorite: Boolean = false,
-    var date: String = "No date available",   // needs to be changed
-    var userScore: Int = 0,
-    var country: String = "Country unknown",
-    var duration: String = "No duration available",   // needs to be changed
-    var genres: List<String> = mutableListOf()
+    var release_date: String = "No date available",
+    var vote_average: Double = 0.0,
+    var original_language: String = "Country unknown",
+    var runtime: Int? = 0,   // details
+    var genres: List<Genre> = mutableListOf(), // details
+    val poster_path: String? = ""
+)
+
+@Serializable
+data class Genre(
+    val id: Int,
+    val name: String
 )
 
 
@@ -41,7 +50,7 @@ fun MovieCard(
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(id = item.imageResId),
+            painter = rememberImagePainter("https://image.tmdb.org/t/p/w200" + item.poster_path),//painterResource(id = item.imageResId),
             contentDescription = null,
             modifier = Modifier
                 .size(
@@ -91,7 +100,7 @@ fun MovieList(
     }
 }
 
-
+/*
 @Preview
 @Composable
 fun MovieListPreview() {
@@ -127,3 +136,4 @@ fun MovieListPreview() {
         )
     )
 }
+*/
