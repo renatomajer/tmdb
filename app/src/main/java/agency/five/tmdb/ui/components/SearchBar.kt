@@ -32,7 +32,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 // TODO: modify search bar behaviour
-
 @Composable
 fun SearchBar() {
     var text by remember { mutableStateOf(value = "") }

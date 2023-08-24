@@ -1,6 +1,6 @@
 package agency.five.tmdb
 
-import agency.five.tmdb.ui.theme.MovieItemViewState
+import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -98,6 +98,7 @@ fun MovieDetails(
 
                 Row {
                     for (i in item.genres.indices) {
+
                         if (i == 0) {
                             Text(
                                 text = item.genres[i],
@@ -111,6 +112,7 @@ fun MovieDetails(
                                 color = Color.White
                             )
                         }
+
                     }
 
                     Text(
@@ -120,6 +122,7 @@ fun MovieDetails(
                         fontWeight = FontWeight.Bold
                     )
                 }
+
                 StarButton()
             }
         }
@@ -186,6 +189,7 @@ fun MovieDetailsPreview() {
     MovieDetails(item = item)
 }
 
+
 @Composable
 fun CircularProgresBar(
     value: Int = 0,
@@ -215,7 +219,6 @@ fun CircularProgresBar(
         )
     }
 }
-
 
 @Preview
 @Composable

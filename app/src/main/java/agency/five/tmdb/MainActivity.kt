@@ -1,4 +1,4 @@
-    package agency.five.tmdb
+package agency.five.tmdb
 
 
 import agency.five.tmdb.navigation.Navigation
@@ -11,7 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.ui.graphics.Color
 
 
-    class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
                 modifier = Modifier.fillMaxSize(),
                 color = Color.White
             ) {
-
                 Navigation()
 
             }

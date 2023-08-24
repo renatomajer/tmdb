@@ -1,7 +1,8 @@
 package agency.five.tmdb
 
-import agency.five.tmdb.ui.theme.MovieItemViewState
+import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.theme.Typography
+import agency.five.tmdb.ui.viewmodel.DetailsScreenViewModel
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -11,42 +12,72 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.NavController
+import kotlinx.coroutines.flow.*
+import org.koin.androidx.compose.viewModel
+import org.koin.core.parameter.parametersOf
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    id: Int?    // movie id
+    id: Int    // movie id
 ) {
+    val movieId = id //?: 0
 
-    val item: MovieItemViewState
-    val persons: List<MoviePerson>
-    val roles: List<MoviePerson>   //list of "Top Billed Cast"
+    val movieDetailsViewModel by viewModel<DetailsScreenViewModel> { parametersOf(id) }
 
-    if (id != null) {
-        item = movies[id]
-    } else {
-        item = movie0
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    val itemFlowLifecycleAware = remember(movieDetailsViewModel.getMovie(movieId), lifecycleOwner) {
+        movieDetailsViewModel.getMovie(movieId).flowWithLifecycle(
+            lifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
     }
 
-    if (id == 0) {
-        persons = listOf(p1, p2, p3, p4, p5, p6)
-        roles = listOf(role1, role2, role3)
-    } else {
-        persons = listOf()
-        roles = listOf()
-    }
+    val personFunctionsFlowLifecycleAware =
+        remember(movieDetailsViewModel.getPersonFunctions(movieId), lifecycleOwner) {
+            movieDetailsViewModel.getPersonFunctions(movieId).flowWithLifecycle(
+                lifecycleOwner.lifecycle,
+                Lifecycle.State.STARTED
+            )
+        }
+
+    val actorsFlowLifecycleAware =
+        remember(movieDetailsViewModel.getActors(movieId), lifecycleOwner) {
+            movieDetailsViewModel.getActors(movieId).flowWithLifecycle(
+                lifecycleOwner.lifecycle,
+                Lifecycle.State.STARTED
+            )
+        }
+
+    //TODO: fix the bug
+    val item: MovieItemViewState by itemFlowLifecycleAware
+        .collectAsState(initial = MovieItemViewState(imageResId = R.drawable.jungle_beat)) //if no imageResId is set, the app crashes
+
+    val personFunctions: List<PersonFunction> by personFunctionsFlowLifecycleAware
+        .collectAsState(initial = emptyList())
+
+    val actors: List<Actor> by actorsFlowLifecycleAware
+        .collectAsState(initial = emptyList()) //list of "Top Billed Cast"
 
     Scaffold(
         topBar = {
@@ -64,7 +95,7 @@ fun DetailsScreen(
 
                 Box(
                     modifier = Modifier
-                        .padding(end = dimensionResource(id = R.dimen.details_screen_box_end_padding))
+                        .padding(end = 48.dp)
                         .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
@@ -72,19 +103,13 @@ fun DetailsScreen(
                     Image(
                         painter = painterResource(id = R.drawable.ic_logo),
                         contentDescription = null,
-                        modifier = Modifier.size(
-                            width = dimensionResource(id = R.dimen.top_bar_logo_width),
-                            height = dimensionResource(
-                                id = R.dimen.top_bar_logo_height
-                            )
-                        )
+                        modifier = Modifier.size(width = 134.dp, height = 35.dp)
                     )
 
                 }
             }
         }
     ) {
-
         LazyColumn() {
 
             item {
@@ -95,10 +120,10 @@ fun DetailsScreen(
 
                 Column(
                     modifier = Modifier.padding(
-                        start = dimensionResource(id = R.dimen.details_screen_overview_start_padding),
-                        end = dimensionResource(id = R.dimen.details_screen_overview_end_padding),
-                        top = dimensionResource(id = R.dimen.details_screen_overview_top_padding),
-                        bottom = dimensionResource(id = R.dimen.details_screen_overview_bottom_padding)
+                        start = 18.dp,
+                        end = 30.dp,
+                        top = 20.dp,
+                        bottom = 22.dp
                     )
                 ) {
                     Text(
@@ -116,27 +141,18 @@ fun DetailsScreen(
             }
 
             gridItems(
-                data = persons,
+                data = personFunctions,
                 columnCount = 3,
-                modifier = Modifier.padding(
-                    start = 18.dp,
-                    end = 13.dp,
-                    bottom = 25.dp
-                ),
+                modifier = Modifier.padding(start = 18.dp, end = 13.dp, bottom = 25.dp),
                 horizontalArrangement = Arrangement.Start
             ) { itemData ->
-                PersonRole(person = itemData)
+                PersonFunction(person = itemData)
             }
 
             item {
                 Row(
                     modifier = Modifier
-                        .padding(
-                            start = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_start_padding),
-                            end = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_end_padding),
-                            bottom = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_bottom_padding),
-                            top = dimensionResource(id = R.dimen.details_screen_top_billed_cast_title_top_padding)
-                        )
+                        .padding(start = 16.dp, end = 13.dp, bottom = 8.dp, top = 20.dp)
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.Bottom
@@ -156,13 +172,13 @@ fun DetailsScreen(
 
             item {
 
-                if (roles.isEmpty()) {
+                if (actors.isEmpty()) {
                     Text(
                         text = "Nothing to show.",
-                        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.details_screen_no_roles_start_padding))
+                        modifier = Modifier.padding(start = 16.dp)
                     )
                 } else {
-                    MoviePersonList(persons = roles)
+                    ActorCardsList(actors = actors)
                 }
             }
         }
@@ -170,101 +186,9 @@ fun DetailsScreen(
 }
 
 
-/* mocked data */
-val movie0 = MovieItemViewState(
-    id = 0,
-    title = "Iron Man 1",
-    overview = "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
-    imageResId = R.drawable.iron_man_1_medium,
-    date = "05/02/2008",
-    userScore = 76,
-    country = "US",
-    duration = "2h 6m",
-    genres = mutableListOf("Action", "Science Fiction", "Adventure")
-)
-
-val movies = listOf(movie0, m1, m2, m3, m4, m5)
-
-// Iron Man 1 persons involved
-val p1 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Don",
-    surname = "Heck",
-    movieFunction = "Characters"
-)
-
-val p2 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Jack",
-    surname = "Kirby",
-    movieFunction = "Characters"
-)
-val p3 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Jon",
-    surname = "Favreau",
-    movieFunction = "Director"
-)
-
-val p4 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Don",
-    surname = "Heck",
-    movieFunction = "Screenplay"
-)
-
-val p5 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Jack",
-    surname = "Marcum",
-    movieFunction = "Screenplay"
-)
-
-val p6 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Matt",
-    surname = "Holloway",
-    movieFunction = "Screenplay"
-)
-
-// Iron Man 1 movie roles
-val role1 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Robert",
-    surname = "Downey Jr.",
-    movieFunction = "Characters",
-    role = "Tony Stark/Iron Man",
-    imageResId = R.drawable.robert_downey
-)
-
-val role2 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Terrence",
-    surname = "Howard",
-    movieFunction = "Characters",
-    role = "James Rhodes",
-    imageResId = R.drawable.terrence_howard
-)
-
-val role3 = MoviePerson(
-    movie = "Iron Man 1",
-    name = "Jeff",
-    surname = "Bridges",
-    movieFunction = "Characters",
-    role = "Obadiah Stane / Iron Monger",
-    imageResId = R.drawable.jeff_bridges
-)
-
-
-@Preview
 @Composable
-fun DetailsScreenPreview() {
-    //DetailsScreen(item = item, persons = listOf(p1, p2, p3, p4, p5, p6), roles = listOf(role1, role2, role3))
-}
-
-@Composable
-fun PersonRole(
-    person: MoviePerson
+fun PersonFunction(
+    person: PersonFunction
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -284,18 +208,17 @@ fun PersonRole(
     }
 }
 
+
 @Preview
 @Composable
 fun PersonRolePreview() {
 
-    val p1 = MoviePerson(
-        movie = "Iron Man 1",
+    val p1 = PersonFunction(
         name = "Don",
         surname = "Heck",
         movieFunction = "Characters"
     )
-
-    PersonRole(person = p1)
+    PersonFunction(person = p1)
 }
 
 

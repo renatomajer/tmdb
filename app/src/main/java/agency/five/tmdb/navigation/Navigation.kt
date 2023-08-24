@@ -24,7 +24,8 @@ fun Navigation() {
                 type = NavType.IntType
             })
         ) { entry ->
-            DetailsScreen(navController = navController, entry.arguments?.getInt("id"))
+            entry.arguments?.getInt("id")?.let { DetailsScreen(navController = navController, it) }
+            //DetailsScreen(navController = navController, entry.arguments?.getInt("id")) //TODO: see if the changed line will work
         }
     }
 }

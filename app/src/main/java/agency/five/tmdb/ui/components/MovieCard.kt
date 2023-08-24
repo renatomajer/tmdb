@@ -1,6 +1,5 @@
-package agency.five.tmdb.ui.theme
+package agency.five.tmdb.ui.components
 
-import agency.five.tmdb.FavoriteButton
 import agency.five.tmdb.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -15,16 +14,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import java.util.*
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
 
 data class MovieItemViewState(
-    val id: Int,
-    val title: String,
-    val overview: String,
-    val imageResId: Int, // id from drawable folder (R.drawable...)
+    val id: Int = 0,
+    val title: String = "",
+    val overview: String = "Nothing to show",
+    val imageResId: Int = -1, // id from drawable folder (R.drawable...)
     var favorite: Boolean = false,
     var date: String = "No date available",   // needs to be changed
     var userScore: Int = 0,
@@ -38,10 +34,11 @@ data class MovieItemViewState(
 fun MovieCard(
     modifier: Modifier = Modifier,
     onMovieItemClick: () -> Unit = {},
+    onFavoriteButtonClick: (MovieItemViewState) -> Unit = {},
     item: MovieItemViewState
 ) {
     Box(
-        modifier = modifier.clickable { onMovieItemClick() }
+        modifier = modifier
     ) {
         Image(
             painter = painterResource(id = item.imageResId),
@@ -51,7 +48,8 @@ fun MovieCard(
                     width = dimensionResource(id = R.dimen.movie_card_width),
                     height = dimensionResource(id = R.dimen.movie_card_height)
                 )
-                .clip(RoundedCornerShape(dimensionResource(id = R.dimen.small_spacing))),
+                .clip(RoundedCornerShape(dimensionResource(id = R.dimen.small_spacing)))
+                .clickable { onMovieItemClick() },
             contentScale = ContentScale.Crop
         )
 
@@ -60,7 +58,8 @@ fun MovieCard(
                 start = dimensionResource(id = R.dimen.small_spacing),
                 top = dimensionResource(id = R.dimen.small_spacing)
             ),
-            favorite = item.favorite
+            movie = item,
+            onFavoriteButtonClick = onFavoriteButtonClick
         )
     }
 }
@@ -70,36 +69,23 @@ fun MovieCard(
 fun MovieList(
     modifier: Modifier = Modifier,
     onMovieItemClick: (MovieItemViewState) -> Unit = {},
+    onFavoriteButtonClick: (MovieItemViewState) -> Unit = {},
     movieItems: List<MovieItemViewState>
 ) {
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
-            .padding(
-                bottom = dimensionResource(id = R.dimen.home_movie_list_bottom_padding)
-            ),
+            .padding(bottom = dimensionResource(id = R.dimen.home_movie_list_bottom_padding)),
         contentPadding = PaddingValues(
             vertical = dimensionResource(id = R.dimen.home_movies_list_content_padding)
         )
     ) {
         items(movieItems) {
-
-            // movie cards padding
-            var contentModifier = Modifier.padding(
-                end = dimensionResource(id = R.dimen.movie_list_item_padding)
-            )
-
-            if (movieItems.indexOf(it) == 0) { // change padding only for the first item
-                contentModifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.movie_list_item_padding),
-                    end = dimensionResource(id = R.dimen.movie_list_item_padding)
-                )
-            }
-
             MovieCard(
                 item = it,
-                modifier = contentModifier,
-                onMovieItemClick = { onMovieItemClick(it) }
+                modifier = Modifier.padding(end = dimensionResource(id = R.dimen.movie_list_item_padding)),
+                onMovieItemClick = { onMovieItemClick(it) },
+                onFavoriteButtonClick = onFavoriteButtonClick
             )
         }
     }
