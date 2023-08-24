@@ -1,6 +1,5 @@
 package agency.five.tmdb
 
-import agency.five.tmdb.ui.theme.MovieCard
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -107,7 +106,6 @@ fun ActorCardPreview() {
         movie = "Iron Man 1",
         name = "Robert",
         surname = "Downey Jr.",
-        movieFunction = "Characters",
         role = "Tony Stark/Iron Man",
         imageResId = R.drawable.robert_downey
     )
