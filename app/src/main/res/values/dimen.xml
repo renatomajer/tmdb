@@ -28,4 +28,8 @@
 
     <dimen name="no_connection_text_top_padding">20dp</dimen>
     <dimen name="no_connection_text_bottom_padding">50dp</dimen>
+    <dimen name="movie_person_image_height">154dp</dimen>
+    <dimen name="movie_person_image_width">125dp</dimen>
+    <dimen name="home_screen_content_padding">20dp</dimen>
+    <dimen name="search_bar_icon_size">20dp</dimen>
 </resources>
