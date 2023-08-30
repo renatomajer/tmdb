@@ -9,7 +9,6 @@ import agency.five.tmdb.ui.components.MovieDetails
 import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.theme.Typography
 import agency.five.tmdb.viewmodel.DetailsScreenViewModel
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,7 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.NavController
@@ -38,7 +37,6 @@ import org.koin.androidx.compose.viewModel
 import org.koin.core.parameter.parametersOf
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailsScreen(
     navController: NavController,
@@ -113,7 +111,7 @@ fun DetailsScreen(
             }
         }
     ) {
-        LazyColumn() {
+        LazyColumn {
 
             item {
                 MovieDetails(item = item, modifier = Modifier.fillMaxWidth())

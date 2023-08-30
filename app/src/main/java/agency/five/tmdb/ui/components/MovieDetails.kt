@@ -193,8 +193,8 @@ fun MovieDetailsPreview() {
 
 @Composable
 fun CircularProgresBar(
-    value: Int = 0,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    value: Int = 0
 ) {
     Box(
         contentAlignment = Alignment.Center,
@@ -213,7 +213,7 @@ fun CircularProgresBar(
         )
 
         Text(
-            text = value.toString() + "%",
+            text = "$value%",
             style = Typography.subtitle2,
             color = Color.White,
             fontSize = 9.sp
@@ -225,5 +225,5 @@ fun CircularProgresBar(
 @Preview
 @Composable
 fun CircularProgrssIndicatorPreview() {
-    CircularProgresBar(3)
+    CircularProgresBar(value = 3)
 }

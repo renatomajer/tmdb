@@ -10,11 +10,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
@@ -60,7 +57,7 @@ fun MovieCard(
         modifier = modifier
     ) {
         Image(
-            painter = rememberImagePainter("https://image.tmdb.org/t/p/w200" + item.poster_path),//painterResource(id = item.imageResId),
+            painter = rememberImagePainter("https://image.tmdb.org/t/p/w200" + item.poster_path),
             contentDescription = null,
             modifier = Modifier
                 .size(
@@ -109,41 +106,3 @@ fun MovieList(
         }
     }
 }
-
-/*
-@Preview
-@Composable
-fun MovieListPreview() {
-    MovieList(
-        movieItems = listOf(
-            MovieItemViewState(
-                id = 0,
-                overview = "",
-                title = "Iron Man",
-                imageResId = R.drawable.iron_man_1
-            ),
-
-            MovieItemViewState(
-                id = 1,
-                overview = "",
-                title = "Gattaca",
-                imageResId = R.drawable.gattaca
-            ),
-
-            MovieItemViewState(
-                id = 2,
-                overview = "",
-                title = "Lion King",
-                imageResId = R.drawable.lion_king
-            ),
-
-            MovieItemViewState(
-                id = 3,
-                overview = "",
-                title = "Puppy Love",
-                imageResId = R.drawable.puppy_love
-            )
-        )
-    )
-}
-*/

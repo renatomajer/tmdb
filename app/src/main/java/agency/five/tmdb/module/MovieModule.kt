@@ -1,7 +1,6 @@
 package agency.five.tmdb.module
 
 
-import agency.five.tmdb.*
 import agency.five.tmdb.data.api.MovieApi
 import agency.five.tmdb.data.api.MovieApiImpl
 import agency.five.tmdb.data.database.AppDatabase
@@ -13,8 +12,6 @@ import agency.five.tmdb.viewmodel.DetailsScreenViewModel
 import agency.five.tmdb.viewmodel.FavoritesScreenViewModel
 import agency.five.tmdb.viewmodel.HomeScreenViewModel
 import android.util.Log
-import androidx.room.Room
-import androidx.room.RoomDatabase
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*

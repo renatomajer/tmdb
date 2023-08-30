@@ -1,6 +1,5 @@
 package agency.five.tmdb.data.api
 
-import agency.five.tmdb.*
 import agency.five.tmdb.domain.common.*
 import agency.five.tmdb.ui.components.MovieItemViewState
 import io.ktor.client.*
@@ -11,8 +10,6 @@ class MovieApiImpl(
     private val client: HttpClient
 ) : MovieApi {
 
-    private val API_KEY = "0d756c167ac7d8a9afae24e0d3af8a9e"
-
     override suspend fun getPopularMovies(): List<List<MovieItemViewState>> {   // size: 4 (tabs)
 
         return try {
@@ -21,7 +18,6 @@ class MovieApiImpl(
             val onTV = getPopularOnTV().subList(0, 10)
             val streaming = getPopularStreaming().subList(0, 10)
 
-            //return listOf(l1, l2, l3, l1)
             listOf(streaming, onTV, forRent, inTheaters)
 
         } catch (exc: Exception) {
@@ -123,7 +119,6 @@ class MovieApiImpl(
         return try {
             val result =
                 client.get<PersonsFunctionsResponse>("https://api.themoviedb.org/3/movie/$movieId/credits?api_key=$API_KEY").personsFunctions
-            //result.forEach { it.movie_id = movieId } // set each persons movie id
 
             if (result.size > 6) result.subList(0, 6)
             else result
@@ -143,5 +138,9 @@ class MovieApiImpl(
         } catch (exc: Exception) {
             emptyList()
         }
+    }
+
+    companion object {
+        private const val API_KEY = "0d756c167ac7d8a9afae24e0d3af8a9e"
     }
 }
