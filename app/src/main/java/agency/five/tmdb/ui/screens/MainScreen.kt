@@ -1,5 +1,6 @@
-package agency.five.tmdb
+package agency.five.tmdb.ui.screens
 
+import agency.five.tmdb.R
 import agency.five.tmdb.ui.theme.TmdbTheme
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.Image

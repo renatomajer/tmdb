@@ -1,7 +1,12 @@
-package agency.five.tmdb
+package agency.five.tmdb.data.repository
 
-import agency.five.tmdb.database.AppDatabase
-import agency.five.tmdb.database.MoviePersonsFunctions
+import agency.five.tmdb.data.api.MovieApi
+import agency.five.tmdb.data.database.AppDatabase
+import agency.five.tmdb.data.database.MovieDatabase
+import agency.five.tmdb.data.database.MoviePersonsFunctions
+import agency.five.tmdb.domain.common.Actor
+import agency.five.tmdb.domain.common.PersonFunction
+import agency.five.tmdb.domain.repointerfaces.MovieRepository
 import agency.five.tmdb.ui.components.MovieItemViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

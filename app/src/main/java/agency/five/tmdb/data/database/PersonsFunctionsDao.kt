@@ -1,6 +1,6 @@
-package agency.five.tmdb.database
+package agency.five.tmdb.data.database
 
-import agency.five.tmdb.PersonFunction
+import agency.five.tmdb.domain.common.PersonFunction
 import androidx.room.*
 
 

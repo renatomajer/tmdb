@@ -1,4 +1,4 @@
-package agency.five.tmdb
+package agency.five.tmdb.domain.common
 
 import agency.five.tmdb.ui.components.MovieItemViewState
 import kotlinx.serialization.SerialName

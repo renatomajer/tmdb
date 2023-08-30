@@ -1,4 +1,4 @@
-package agency.five.tmdb
+package agency.five.tmdb.data.database
 
 import agency.five.tmdb.ui.components.MovieItemViewState
 

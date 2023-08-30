@@ -1,4 +1,4 @@
-package agency.five.tmdb.database
+package agency.five.tmdb.data.database
 
 import agency.five.tmdb.ui.components.MovieItemViewState
 import androidx.room.*

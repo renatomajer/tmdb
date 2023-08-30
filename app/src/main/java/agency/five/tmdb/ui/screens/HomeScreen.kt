@@ -1,10 +1,11 @@
-package agency.five.tmdb
+package agency.five.tmdb.ui.screens
 
+import agency.five.tmdb.R
 import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.components.SearchBar
 import agency.five.tmdb.ui.components.TabList
 import agency.five.tmdb.ui.theme.Typography
-import agency.five.tmdb.ui.viewmodel.HomeScreenViewModel
+import agency.five.tmdb.viewmodel.HomeScreenViewModel
 import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth

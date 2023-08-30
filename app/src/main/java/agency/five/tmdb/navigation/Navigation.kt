@@ -1,7 +1,7 @@
 package agency.five.tmdb.navigation
 
-import agency.five.tmdb.DetailsScreen
-import agency.five.tmdb.MainScreen
+import agency.five.tmdb.ui.screens.DetailsScreen
+import agency.five.tmdb.ui.screens.MainScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost

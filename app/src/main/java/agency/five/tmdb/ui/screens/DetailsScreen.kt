@@ -1,10 +1,14 @@
-package agency.five.tmdb
+package agency.five.tmdb.ui.screens
 
+
+import agency.five.tmdb.R
+import agency.five.tmdb.domain.common.Actor
+import agency.five.tmdb.domain.common.PersonFunction
 import agency.five.tmdb.ui.components.ActorCardsList
 import agency.five.tmdb.ui.components.MovieDetails
 import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.theme.Typography
-import agency.five.tmdb.ui.viewmodel.DetailsScreenViewModel
+import agency.five.tmdb.viewmodel.DetailsScreenViewModel
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

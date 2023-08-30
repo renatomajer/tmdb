@@ -1,7 +1,8 @@
-package agency.five.tmdb.database
+package agency.five.tmdb.data.database
 
-import agency.five.tmdb.Actor
-import agency.five.tmdb.PersonFunction
+
+import agency.five.tmdb.domain.common.Actor
+import agency.five.tmdb.domain.common.PersonFunction
 import agency.five.tmdb.ui.components.MovieItemViewState
 import androidx.room.*
 

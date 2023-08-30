@@ -1,4 +1,4 @@
-package agency.five.tmdb
+package agency.five.tmdb.domain.common
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

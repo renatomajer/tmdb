@@ -1,5 +1,7 @@
-package agency.five.tmdb
+package agency.five.tmdb.data.api
 
+import agency.five.tmdb.*
+import agency.five.tmdb.domain.common.*
 import agency.five.tmdb.ui.components.MovieItemViewState
 import io.ktor.client.*
 import io.ktor.client.request.*

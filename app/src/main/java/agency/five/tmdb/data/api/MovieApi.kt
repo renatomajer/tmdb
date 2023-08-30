@@ -1,5 +1,8 @@
-package agency.five.tmdb
+package agency.five.tmdb.data.api
 
+
+import agency.five.tmdb.domain.common.Actor
+import agency.five.tmdb.domain.common.PersonFunction
 import agency.five.tmdb.ui.components.MovieItemViewState
 
 

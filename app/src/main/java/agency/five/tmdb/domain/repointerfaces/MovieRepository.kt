@@ -1,5 +1,8 @@
-package agency.five.tmdb
+package agency.five.tmdb.domain.repointerfaces
 
+
+import agency.five.tmdb.domain.common.Actor
+import agency.five.tmdb.domain.common.PersonFunction
 import agency.five.tmdb.ui.components.MovieItemViewState
 import kotlinx.coroutines.flow.Flow
 

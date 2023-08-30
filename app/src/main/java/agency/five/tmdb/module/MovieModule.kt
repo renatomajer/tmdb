@@ -2,10 +2,16 @@ package agency.five.tmdb.module
 
 
 import agency.five.tmdb.*
-import agency.five.tmdb.database.AppDatabase
-import agency.five.tmdb.ui.viewmodel.DetailsScreenViewModel
-import agency.five.tmdb.ui.viewmodel.FavoritesScreenViewModel
-import agency.five.tmdb.ui.viewmodel.HomeScreenViewModel
+import agency.five.tmdb.data.api.MovieApi
+import agency.five.tmdb.data.api.MovieApiImpl
+import agency.five.tmdb.data.database.AppDatabase
+import agency.five.tmdb.data.database.MovieDatabase
+import agency.five.tmdb.data.database.MovieDatabaseImpl
+import agency.five.tmdb.data.repository.MovieRepositoryImpl
+import agency.five.tmdb.domain.repointerfaces.MovieRepository
+import agency.five.tmdb.viewmodel.DetailsScreenViewModel
+import agency.five.tmdb.viewmodel.FavoritesScreenViewModel
+import agency.five.tmdb.viewmodel.HomeScreenViewModel
 import android.util.Log
 import androidx.room.Room
 import androidx.room.RoomDatabase

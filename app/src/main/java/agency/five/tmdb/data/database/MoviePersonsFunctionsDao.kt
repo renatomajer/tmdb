@@ -1,4 +1,4 @@
-package agency.five.tmdb.database
+package agency.five.tmdb.data.database
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

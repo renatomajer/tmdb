@@ -1,7 +1,7 @@
 package agency.five.tmdb.ui.components
 
-import agency.five.tmdb.Actor
 import agency.five.tmdb.R
+import agency.five.tmdb.domain.common.Actor
 import agency.five.tmdb.ui.theme.Typography
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

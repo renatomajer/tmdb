@@ -1,7 +1,10 @@
-package agency.five.tmdb.database
+package agency.five.tmdb.data.database
 
-import agency.five.tmdb.Actor
-import androidx.room.*
+import agency.five.tmdb.domain.common.Actor
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 
 @Dao
