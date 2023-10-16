@@ -5,10 +5,11 @@ import agency.five.tmdb.ui.components.MovieItemViewState
 import agency.five.tmdb.ui.components.SearchBar
 import agency.five.tmdb.ui.components.TabList
 import agency.five.tmdb.ui.theme.Typography
+import agency.five.tmdb.ui.theme.homeScreenContentPadding
 import agency.five.tmdb.viewmodel.HomeScreenViewModel
 import android.util.Log
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +17,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.viewModel
 
@@ -103,7 +103,6 @@ fun HomeScreen(
     )
 
     LazyColumn(
-        contentPadding = PaddingValues(horizontal = 18.dp),
         modifier = modifier
     ) {
 
@@ -117,7 +116,8 @@ fun HomeScreen(
                 Text(
                     text = stringResource(id = R.string.whats_popular_section),
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(start = homeScreenContentPadding, end = homeScreenContentPadding),
                     style = Typography.h6
                 )
 
@@ -133,7 +133,8 @@ fun HomeScreen(
                 Text(
                     text = stringResource(id = R.string.free_to_watch_section),
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(start = homeScreenContentPadding, end = homeScreenContentPadding),
                     style = Typography.h6
                 )
 
@@ -149,7 +150,8 @@ fun HomeScreen(
                 Text(
                     text = stringResource(id = R.string.trending_section),
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(start = homeScreenContentPadding, end = homeScreenContentPadding),
                     style = Typography.h6
                 )
 

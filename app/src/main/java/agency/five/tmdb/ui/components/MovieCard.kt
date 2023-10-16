@@ -1,11 +1,12 @@
 package agency.five.tmdb.ui.components
 
 import agency.five.tmdb.R
+import agency.five.tmdb.ui.theme.homeScreenContentPadding
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -96,11 +97,22 @@ fun MovieList(
             vertical = dimensionResource(id = R.dimen.home_movies_list_content_padding)
         )
     ) {
-        items(movieItems) {
+        itemsIndexed(movieItems) { index, item ->
+
+            val padding = if (index == 0) {
+                // Add start padding to the first movie item
+                PaddingValues(
+                    start = homeScreenContentPadding,
+                    end = dimensionResource(id = R.dimen.movie_list_item_padding)
+                )
+            } else {
+                PaddingValues(end = dimensionResource(id = R.dimen.movie_list_item_padding))
+            }
+
             MovieCard(
-                item = it,
-                modifier = Modifier.padding(end = dimensionResource(id = R.dimen.movie_list_item_padding)),
-                onMovieItemClick = { onMovieItemClick(it) },
+                item = item,
+                modifier = Modifier.padding(padding),
+                onMovieItemClick = { onMovieItemClick(item) },
                 onFavoriteButtonClick = onFavoriteButtonClick
             )
         }

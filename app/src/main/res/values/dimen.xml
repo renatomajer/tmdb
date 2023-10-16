@@ -5,7 +5,7 @@
     <dimen name="medium_spacing">20dp</dimen>
     <dimen name="large_spacing">32dp</dimen>
 
-    <dimen name="movie_list_item_padding">14dp</dimen>
+    <dimen name="movie_list_item_padding">9dp</dimen>
 
     <dimen name="movie_card_width">122dp</dimen>
     <dimen name="movie_card_height">179dp</dimen>

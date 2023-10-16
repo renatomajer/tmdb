@@ -4,6 +4,7 @@ package agency.five.tmdb.ui.components
 import agency.five.tmdb.R
 import agency.five.tmdb.navigation.Screens
 import agency.five.tmdb.ui.theme.Typography
+import agency.five.tmdb.ui.theme.homeScreenContentPadding
 import agency.five.tmdb.viewmodel.HomeScreenViewModel
 import android.util.Log
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -37,6 +38,10 @@ fun TabList(
         horizontalAlignment = Alignment.Start
     ) {
         TabRow(
+            modifier = Modifier.padding(
+                start = homeScreenContentPadding,
+                end = homeScreenContentPadding
+            ),
             selectedTabIndex = tabIndex,
             backgroundColor = Color.Transparent,
             divider = { TabRowDefaults.Divider(thickness = 5.dp, color = Color.Transparent) },
