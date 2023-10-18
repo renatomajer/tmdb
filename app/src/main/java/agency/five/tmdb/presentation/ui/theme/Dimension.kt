@@ -1,4 +1,4 @@
-package agency.five.tmdb.ui.theme
+package agency.five.tmdb.presentation.ui.theme
 
 import androidx.compose.ui.unit.dp
 

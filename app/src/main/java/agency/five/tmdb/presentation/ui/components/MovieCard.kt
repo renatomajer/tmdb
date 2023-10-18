@@ -1,7 +1,7 @@
-package agency.five.tmdb.ui.components
+package agency.five.tmdb.presentation.ui.components
 
 import agency.five.tmdb.R
-import agency.five.tmdb.ui.theme.homeScreenContentPadding
+import agency.five.tmdb.presentation.ui.theme.homeScreenContentPadding
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

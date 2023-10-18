@@ -1,4 +1,4 @@
-package agency.five.tmdb.module
+package agency.five.tmdb.di
 
 import agency.five.tmdb.BuildConfig
 import android.app.Application

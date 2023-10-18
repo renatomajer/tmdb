@@ -1,6 +1,6 @@
 package agency.five.tmdb.data.database
 
-import agency.five.tmdb.ui.components.MovieItemViewState
+import agency.five.tmdb.presentation.ui.components.MovieItemViewState
 
 interface MovieDatabase {
 

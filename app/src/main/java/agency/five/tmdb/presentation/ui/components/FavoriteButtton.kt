@@ -1,4 +1,4 @@
-package agency.five.tmdb.ui.components
+package agency.five.tmdb.presentation.ui.components
 
 import agency.five.tmdb.R
 import androidx.compose.foundation.background

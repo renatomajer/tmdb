@@ -1,7 +1,7 @@
-package agency.five.tmdb
+package agency.five.tmdb.presentation
 
 
-import agency.five.tmdb.navigation.Navigation
+import agency.five.tmdb.presentation.navigation.Navigation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent

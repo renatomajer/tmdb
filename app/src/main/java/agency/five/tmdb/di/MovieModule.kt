@@ -1,4 +1,4 @@
-package agency.five.tmdb.module
+package agency.five.tmdb.di
 
 
 import agency.five.tmdb.data.api.MovieApi
@@ -8,9 +8,9 @@ import agency.five.tmdb.data.database.MovieDatabase
 import agency.five.tmdb.data.database.MovieDatabaseImpl
 import agency.five.tmdb.data.repository.MovieRepositoryImpl
 import agency.five.tmdb.domain.repointerfaces.MovieRepository
-import agency.five.tmdb.viewmodel.DetailsScreenViewModel
-import agency.five.tmdb.viewmodel.FavoritesScreenViewModel
-import agency.five.tmdb.viewmodel.HomeScreenViewModel
+import agency.five.tmdb.presentation.viewmodel.DetailsScreenViewModel
+import agency.five.tmdb.presentation.viewmodel.FavoritesScreenViewModel
+import agency.five.tmdb.presentation.viewmodel.HomeScreenViewModel
 import android.util.Log
 import io.ktor.client.*
 import io.ktor.client.engine.android.*

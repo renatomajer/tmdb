@@ -1,7 +1,7 @@
-package agency.five.tmdb.viewmodel
+package agency.five.tmdb.presentation.viewmodel
 
 import agency.five.tmdb.domain.repointerfaces.MovieRepository
-import agency.five.tmdb.ui.components.MovieItemViewState
+import agency.five.tmdb.presentation.ui.components.MovieItemViewState
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

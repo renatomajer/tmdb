@@ -1,10 +1,10 @@
-package agency.five.tmdb.ui.screens
+package agency.five.tmdb.presentation.ui.screens
 
-import agency.five.tmdb.navigation.Screens
-import agency.five.tmdb.ui.components.MovieCard
-import agency.five.tmdb.ui.components.MovieItemViewState
-import agency.five.tmdb.ui.theme.Typography
-import agency.five.tmdb.viewmodel.FavoritesScreenViewModel
+import agency.five.tmdb.presentation.navigation.Screens
+import agency.five.tmdb.presentation.ui.components.MovieCard
+import agency.five.tmdb.presentation.ui.components.MovieItemViewState
+import agency.five.tmdb.presentation.ui.theme.Typography
+import agency.five.tmdb.presentation.viewmodel.FavoritesScreenViewModel
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells

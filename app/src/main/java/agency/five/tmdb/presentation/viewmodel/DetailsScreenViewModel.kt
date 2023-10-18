@@ -1,10 +1,10 @@
-package agency.five.tmdb.viewmodel
+package agency.five.tmdb.presentation.viewmodel
 
 
 import agency.five.tmdb.domain.common.Actor
 import agency.five.tmdb.domain.common.PersonFunction
 import agency.five.tmdb.domain.repointerfaces.MovieRepository
-import agency.five.tmdb.ui.components.MovieItemViewState
+import agency.five.tmdb.presentation.ui.components.MovieItemViewState
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent

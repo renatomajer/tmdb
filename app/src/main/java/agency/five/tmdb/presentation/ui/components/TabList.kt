@@ -1,11 +1,11 @@
-package agency.five.tmdb.ui.components
+package agency.five.tmdb.presentation.ui.components
 
 
 import agency.five.tmdb.R
-import agency.five.tmdb.navigation.Screens
-import agency.five.tmdb.ui.theme.Typography
-import agency.five.tmdb.ui.theme.homeScreenContentPadding
-import agency.five.tmdb.viewmodel.HomeScreenViewModel
+import agency.five.tmdb.presentation.navigation.Screens
+import agency.five.tmdb.presentation.ui.theme.Typography
+import agency.five.tmdb.presentation.ui.theme.homeScreenContentPadding
+import agency.five.tmdb.presentation.viewmodel.HomeScreenViewModel
 import android.util.Log
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
