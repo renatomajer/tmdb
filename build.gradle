@@ -1,28 +1,49 @@
 buildscript {
     ext {
-        compose_version = '1.0.1'
-    }
- //ubacio blokove repositories i dependencies
-    repositories {
-        google()
-        mavenCentral()
-
-    }
-
-    dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:1.5.21"
+        compose_version = '1.5.4'
     }
 
 
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '7.1.2' apply false
-    id 'com.android.library' version '7.1.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.5.21' apply false
+    id 'com.android.application' version '8.2.0' apply false
+    id 'com.android.library' version '8.2.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.20' apply false
+    id 'org.jetbrains.kotlin.jvm' version '1.9.20' apply false
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.20'
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+
+    compile_sdk = 34
+    min_sdk = 23
+    target_sdk = 34
+
+    core_version = "1.12.0"
+    lifecycle_version = "2.6.2"
+    appcompat_version = "1.6.1"
+
+    material_version = "1.10.0"
+
+    activity_compose_version = "1.8.1"
+
+    junit_version = "4.13.2"
+    android_junit_version = "1.1.5"
+    espresso_version = "3.5.1"
+
+    nav_version = "2.7.5"
+
+    coroutines_version = "1.7.3"
+
+    koin_version = "3.5.2-RC1"
+
+    coil_version = "2.5.0"
+
+    ktor_version = "2.3.6"
+
+    room_version = "2.6.1"
 }

@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="agency.five.tmdb">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".di.ApplicationModule"
+        android:name=".TmdbApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_logo"
+        android:icon="@mipmap/tmdb_ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_logo"
+        android:roundIcon="@mipmap/tmdb_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tmdb">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Tmdb">
+            android:theme="@style/Theme.Tmdb.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
