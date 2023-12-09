@@ -14,3 +14,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Tmdb"
 include ':app'
+include ':data:api'
+include ':data:database'
+include ':data:repository'
+include ':domain:common'
+include ':domain:repointerfaces'
+include ':domain:usecase'
