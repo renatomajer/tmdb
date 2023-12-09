@@ -7,7 +7,6 @@ import agency.five.tmdb.domain.usecase.GetPopularMoviesUseCase
 import agency.five.tmdb.domain.usecase.GetTrendingMoviesUseCase
 import agency.five.tmdb.domain.usecase.UpdateIsMovieFavoriteUseCase
 import agency.five.tmdb.ui.state.MoviesUiState
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

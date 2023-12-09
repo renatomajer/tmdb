@@ -3,11 +3,10 @@ package agency.five.tmdb.data.api
 import agency.five.tmdb.data.api.dto.CreditsDto
 import agency.five.tmdb.data.api.dto.MoviesResponse
 import agency.five.tmdb.data.api.dto.movie.details.MovieDetailsDto
-import agency.five.tmdb.domain.common.Constants
 import agency.five.tmdb.domain.common.Constants.API_BASE_URL
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
 
 
 class MovieApiImpl(

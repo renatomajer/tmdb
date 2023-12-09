@@ -18,9 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import org.koin.androidx.compose.getViewModel
-import org.koin.androidx.compose.viewModel
 
 
 @OptIn(ExperimentalMaterialApi::class)

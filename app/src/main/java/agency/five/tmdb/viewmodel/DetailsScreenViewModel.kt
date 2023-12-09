@@ -1,7 +1,6 @@
 package agency.five.tmdb.viewmodel
 
 
-import agency.five.tmdb.domain.common.Credits
 import agency.five.tmdb.domain.common.Movie
 import agency.five.tmdb.domain.common.MovieDetails
 import agency.five.tmdb.domain.common.Resource
@@ -17,7 +16,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

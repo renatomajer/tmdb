@@ -5,13 +5,11 @@ import agency.five.tmdb.domain.common.Resource
 import agency.five.tmdb.domain.usecase.GetFavoriteMoviesUseCase
 import agency.five.tmdb.domain.usecase.UpdateIsMovieFavoriteUseCase
 import agency.five.tmdb.ui.state.FavoriteMoviesUiState
-import agency.five.tmdb.ui.state.MoviesUiState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
