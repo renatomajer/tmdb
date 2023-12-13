@@ -1,24 +1,28 @@
 # TMDB
 
-TMDB is an Android application in which users can view movies by categories, see details about a movie, search for movies, and save movies as favorites.
+TMDB is an Android application in which users can view movies by categories, see details about a movie, and save movies as favorites.
+The application uses <a href="https://www.themoviedb.org/">The Movie Database</a> (TMDB) api to retrieve movie information.
 
 ## Technologies
 
+ - Kotlin
  - Jetpack Compose
  - MVVM architectural pattern
+ - Clean architecture
  - Room database
- - asynchronous Flow
+ - Kotlin Asynchronous Flow
+ - Kotlin Coroutines
  - Ktor framework for HTTP requests
- - Koin dependency injection framework.
+ - Koin dependency injection framework
 
 ## Screenshots
 
 <p align="center">
- <kbd> <img src="https://user-images.githubusercontent.com/46069535/172400052-16fb27f5-f0bb-41f4-91b2-971cbc0b26b7.jpg" width="300" height="600" /> </kbd>
- <kbd> <img src="https://user-images.githubusercontent.com/46069535/172399993-3b442ade-1def-4de2-970c-c9bdacc7c827.jpg" width="300" height="600" /> </kbd>
+ <kbd> <img src="https://github.com/renatomajer/tmdb/assets/46069535/63a3b4e4-17dd-43b4-ab37-35a12cd57848" width="300" height="600"/> </kbd>
+ <kbd> <img src="https://github.com/renatomajer/tmdb/assets/46069535/88a56678-277e-4035-be6c-345191d67e01" width="300" height="600"/> </kbd>
   </p>
 
 <p align="center">
-  <kbd> <img src="https://user-images.githubusercontent.com/46069535/172400037-221b7aaa-34b0-4284-8bd5-b5a2da4e74d4.jpg" width="300" height="600" /> </kbd>
-  <kbd> <img src="https://user-images.githubusercontent.com/46069535/172400018-74e886a5-6721-40c0-ba61-d087f5e49753.jpg" width="300" height="600" /> </kbd> 
+  <kbd> <img src="https://github.com/renatomajer/tmdb/assets/46069535/3252c375-a3fe-40eb-af41-a967115f84f8" width="300" height="600" /> </kbd>
+  <kbd> <img src="https://github.com/renatomajer/tmdb/assets/46069535/bf5c70c4-b88e-4ef3-a6e3-0744379c9b59" width="300" height="600" /> </kbd> 
   </p>
