@@ -16,7 +16,7 @@ data class MovieDetailsDto(
     val homepage: String,
     val id: Int,
     @SerialName("imdb_id")
-    val imdbId: String,
+    val imdbId: String?,
     @SerialName("original_language")
     val originalLanguage: String,
     @SerialName("original_title")
