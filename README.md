@@ -1,6 +1,6 @@
 # TMDB
 
-TMDB is an Android application in which users can view movies by categories, see details about a movie, and save movies as favorites.
+TMDB is an Android application in which users can browse movies by categories, see details about a movie, and save movies as favorites.
 The application uses <a href="https://www.themoviedb.org/">The Movie Database</a> (TMDB) api to retrieve movie information.
 
 ## Technologies
